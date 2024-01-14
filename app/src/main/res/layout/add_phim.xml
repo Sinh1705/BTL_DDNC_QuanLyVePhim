@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Thêm phim mới"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/sp_category"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <EditText
+        android:id="@+id/edt_add_ten"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Tên..."
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_mota"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Mô tả"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_gia"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Giá"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_khoichieu"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Khởi chiếu"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_linkanh"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Link ảnh"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_linkanh_banner"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Link..."
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_add_linkvideo"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Link video"
+        android:paddingStart="10sp" />
+
+    <Button
+        android:id="@+id/btn_add_theloai"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:hint="THÊM"
+        android:paddingStart="10sp"
+        android:textColor="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_edt_admin"
+    android:backgroundTint="@color/white">
+
+    <ImageView
+        android:id="@+id/img_phim"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:src="@drawable/anh_1" />
+    <LinearLayout
+        android:layout_marginLeft="5sp"
+        android:id="@+id/liner_chitiet"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/img_phim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Hai con gấu"
+            android:textSize="15sp"
+            android:id="@+id/tv_ten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Thể loại:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Hoạt hình"
+                android:textSize="12sp"
+                android:id="@+id/tv_theloai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:text="Kể về cuộc phưu lưu của 2 con gấu"
+            android:textSize="12sp"
+            android:id="@+id/tv_mota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="50000"
+            android:textSize="12sp"
+            android:textColor="#F31010"
+            android:id="@+id/tv_gia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#19A9EA"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Khởi chiếu:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="20/11/2024"
+                android:textSize="12sp"
+                android:id="@+id/tv_khoichieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_margin="20sp"
+        android:id="@+id/img_delete"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
+
+    <ImageView
+        android:layout_marginRight="20sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/img_delete"
+        android:layout_marginBottom="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_fix_phim" />
+    <View
+        android:layout_below="@+id/img_phim"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>

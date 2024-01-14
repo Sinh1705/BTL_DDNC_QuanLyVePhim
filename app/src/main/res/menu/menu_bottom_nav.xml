@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_category"
+          android:title="@string/action_category"
+        android:icon="@drawable/ic_category"
+        />
+    <item android:id="@+id/action_fastfood"
+        android:title="@string/action_fastfood"
+        android:icon="@drawable/ic_fastfood"
+        />
+    <item android:id="@+id/action_home"
+        android:title="@string/action_home"
+        android:icon="@drawable/ic_home"
+        />
+    <item android:id="@+id/action_history"
+        android:title="@string/action_history"
+        android:icon="@drawable/ic_history"
+        />
+    <item android:id="@+id/action_manager"
+        android:title="@string/action_manager"
+        android:icon="@drawable/ic_manage_accounts"
+        />
+
+</menu>
