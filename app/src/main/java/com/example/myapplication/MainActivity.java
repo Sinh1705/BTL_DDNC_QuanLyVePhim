@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    String test="day la du lieu moi";
+    //String test="day la du lieu moi";
     RecyclerView recyclerView;
     PhimAdapter phimAdapter;
 
