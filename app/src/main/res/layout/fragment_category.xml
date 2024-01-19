@@ -9,30 +9,52 @@
     >
 
 
-    <EditText
-        android:id="@+id/edt_admin"
+<!--    <EditText-->
+<!--        android:id="@+id/edt_admin"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50sp"-->
+<!--        android:layout_marginStart="20sp"-->
+<!--        android:layout_marginTop="20sp"-->
+<!--        android:layout_marginEnd="20sp"-->
+<!--        android:layout_marginBottom="20sp"-->
+<!--        android:background="@drawable/custom_edt_admin"-->
+<!--        android:drawableEnd="@drawable/ic_custom_edt_admin"-->
+<!--        android:hint="Tên..."-->
+<!--        android:paddingStart="10sp" />-->
+    <TextView
+        android:id="@+id/tv_category_theloai"
+        android:padding="10sp"
+        android:textColor="@color/white"
+        android:text="Thể loại"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
+        android:layout_height="50sp"/>
+    <SearchView
+        android:layout_below="@id/tv_category_theloai"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="10sp"
+        android:id="@+id/searchView_category"
+        android:queryHint="Tên..."
         android:background="@drawable/custom_edt_admin"
-        android:drawableEnd="@drawable/ic_custom_edt_admin"
-        android:hint="Tên..."
-        android:paddingStart="10sp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <!-- FloatingActionButton -->
 
-    <ListView
-        android:id="@+id/listView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/recyclerview_theloai"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edt_admin"
-        android:layout_marginLeft="20sp"
-        android:layout_marginTop="17sp"
-        android:layout_marginRight="20sp"
-        android:layout_marginBottom="80sp" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchView_category"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginRight="10sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabutton"
@@ -43,7 +65,7 @@
         android:layout_marginEnd="30sp"
         app:shapeAppearance="@style/ThemeOverlay.AppCompat"
         android:backgroundTint="@color/colorPrimary"
-        android:layout_marginBottom="85sp"
+        android:layout_marginBottom="30sp"
         android:src="@drawable/ic_add"
 
         android:contentDescription="Add Item" />

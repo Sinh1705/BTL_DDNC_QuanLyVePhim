@@ -191,7 +191,7 @@
             android:id="@+id/tv_ve_thanhtoan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tiền mặt"
+            android:text="Tiền mặt:"
             android:textSize="16sp" />
 
     </LinearLayout>
