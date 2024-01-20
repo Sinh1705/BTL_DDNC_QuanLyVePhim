@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theloai);
+        setContentView(R.layout.user_buy_ticket);
 
-        recyclerView = findViewById(R.id.recyclerview);
+        /*recyclerView = findViewById(R.id.recyclerview);
         mListPhim = new ArrayList<>();
         Phim phim1 = new Phim(R.drawable.anh_1,"1","Hoạt hình","Kể về cuộc phưu lưu ",12,"12/5/22024");
         Phim phim2 = new Phim(R.drawable.anh_1,"2","Hoạt hình","Kể về cuộc phưu lưu ",12,"12/5/22024");
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         phimAdapter = new PhimAdapter(mListPhim);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(phimAdapter);
+        recyclerView.setAdapter(phimAdapter);*/
     }
 
 }
