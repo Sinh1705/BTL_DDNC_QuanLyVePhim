@@ -4,10 +4,6 @@
           android:title="@string/action_category"
         android:icon="@drawable/ic_category"
         />
-    <item android:id="@+id/action_fastfood"
-        android:title="@string/action_fastfood"
-        android:icon="@drawable/ic_fastfood"
-        />
     <item android:id="@+id/action_home"
         android:title="@string/action_home"
         android:icon="@drawable/ic_home"
