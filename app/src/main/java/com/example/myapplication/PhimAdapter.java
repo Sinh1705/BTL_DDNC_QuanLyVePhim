@@ -63,8 +63,7 @@ import java.util.List;
 }
 */
 
-public class
-PhimAdapter extends RecyclerView.Adapter<PhimAdapter.PhimViewHolder> {
+public class PhimAdapter extends RecyclerView.Adapter<PhimAdapter.PhimViewHolder> {
 
     private List<Phim> mlistPhim;
 

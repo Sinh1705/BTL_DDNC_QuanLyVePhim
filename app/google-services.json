@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1032333209892",
+    "project_id": "btlfirebase-acedd",
+    "storage_bucket": "btlfirebase-acedd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032333209892:android:51c529a5ec1cb192b283b1",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt42evTt5yE75rKilCewK0afCb5R594Qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

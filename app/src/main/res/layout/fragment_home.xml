@@ -26,13 +26,47 @@
         android:background="@drawable/custom_edt_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.nex3z.flowlayout.FlowLayout
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_below="@+id/searchView_home"
+        android:id="@+id/flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_margin="5sp"
+            android:padding="5sp"
+            android:background="@drawable/custom_flowlayout"
+            android:text="Hoạt hình"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:padding="5sp"
+            android:background="@drawable/custom_flowlayout"
+            android:text="Hành động"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_margin="5sp"
+            android:padding="5sp"
+            android:background="@drawable/custom_flowlayout"
+            android:text="Tình cảm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </com.nex3z.flowlayout.FlowLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/recyclerview_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/searchView_home"
+        android:layout_below="@id/flow_layout"
         android:layout_marginLeft="10sp"
         android:layout_marginTop="10sp"
         android:layout_marginRight="10sp" />
