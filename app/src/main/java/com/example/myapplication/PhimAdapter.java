@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,108 +9,57 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-/*public class PhimAdapter extends RecyclerView.Adapter<PhimAdapter.ViewHolder> {
-    Context context;
-    private List<Phim> listPhim;
+public class PhimAdapter extends FirebaseRecyclerAdapter<Phim,PhimAdapter.ViewHoleder> {
+    /**
+     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
+     * {@link FirebaseRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public PhimAdapter(@NonNull FirebaseRecyclerOptions<Phim> options) {
+        super(options);
+    }
 
-    public PhimAdapter(List<Phim> listPhim){
-        this.listPhim = listPhim;
+    @Override
+    protected void onBindViewHolder(@NonNull ViewHoleder holder, int position, @NonNull Phim model) {
+        holder.theloai.setText(model.getTheloai());
+        holder.ten.setText(model.getTen());
+        holder.mota.setText(model.getMota());
+        holder.gia.setText(String.valueOf(model.getGia())); //nhớ phần này
+        holder.khoichieu.setText(model.getGiokhoichieu());
+        Glide.with(holder.anhphim.getContext())
+                .load(model.getAnhphim())
+                .placeholder(R.drawable.anh_1) // Hiển thị ảnh này trong khi đang tải
+                .error(R.drawable.anh_1) // Hiển thị ảnh này nếu có lỗi khi tải
+                .into(holder.anhphim);
+
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //gán view
+    public ViewHoleder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_item_phim,parent,false);
-        return new ViewHolder(view);
+        return new ViewHoleder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Phim phim = listPhim.get(position);
-        holder.imageView.setImageResource(phim.getHinh());
-        holder.txtTen.setText(phim.getTen());
-        holder.txtTheloai.setText(phim.getTheloai());
-        holder.txtMota.setText(phim.getMota());
-        holder.txtGia.setText((int) phim.getGia());
-        holder.txtKhoichieu.setText(phim.getGiokhoichieu());
+    public class ViewHoleder extends RecyclerView.ViewHolder{
 
-    }
+        TextView theloai , ten , mota, gia , khoichieu ;
+        ImageView anhphim ;
 
-
-    @Override
-    public int getItemCount() {
-        return listPhim.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView txtTen , txtTheloai , txtMota , txtKhoichieu , txtGia;
-        public ViewHolder(@NonNull View view) {
-            super(view);
-            imageView = view.findViewById(R.id.img_phim);
-            txtTen = view.findViewById(R.id.tv_ten);
-            txtTheloai = view.findViewById(R.id.tv_ten);
-            txtMota = view.findViewById(R.id.tv_ten);
-            txtKhoichieu = view.findViewById(R.id.tv_ten);
-            txtGia = view.findViewById(R.id.tv_khoichieu);
-        }
-    }
-}
-*/
-
-public class PhimAdapter extends RecyclerView.Adapter<PhimAdapter.PhimViewHolder> {
-
-    private List<Phim> mlistPhim;
-
-    public PhimAdapter(List<Phim> mlistPhim){
-        this.mlistPhim = mlistPhim;
-    }
-
-    @NonNull
-    @Override
-    public PhimViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_item_phim,parent,false);
-        return new PhimViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull PhimViewHolder holder, int position) {
-        Phim phim = mlistPhim.get(position);
-        if(phim == null){
-            return;
-        }
-        holder.imageView.setImageResource(phim.getHinh());
-        holder.txtTen.setText(phim.getTen());
-        holder.txtTheloai.setText(phim.getTheloai());
-        holder.txtMota.setText(phim.getMota());
-        holder.txtGia.setText(String.valueOf(phim.getGia()));
-        holder.txtKhoichieu.setText(phim.getGiokhoichieu());
-    }
-
-    @Override
-    public int getItemCount() {
-        if(mlistPhim!=null){
-            return mlistPhim.size();
-        }
-        return 0;
-    }
-
-    class PhimViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
-        TextView txtTen , txtTheloai , txtMota , txtKhoichieu , txtGia;
-
-        public PhimViewHolder(@NonNull View itemView) {
+        public ViewHoleder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.img_phim);
-            txtTen = itemView.findViewById(R.id.tv_ten);
-            txtTheloai = itemView.findViewById(R.id.tv_theloai);
-            txtMota = itemView.findViewById(R.id.tv_mota);
-            txtKhoichieu = itemView.findViewById(R.id.tv_khoichieu);
-            txtGia = itemView.findViewById(R.id.tv_gia);
+
+            theloai = itemView.findViewById(R.id.tv_theloai);
+            ten = itemView.findViewById(R.id.tv_ten);
+            mota = itemView.findViewById(R.id.tv_mota);
+            gia = itemView.findViewById(R.id.tv_gia);
+            khoichieu = itemView.findViewById(R.id.tv_khoichieu);
+            anhphim = itemView.findViewById(R.id.img_phim);
         }
     }
 }

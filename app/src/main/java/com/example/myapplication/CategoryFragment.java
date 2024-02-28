@@ -73,6 +73,17 @@ public class CategoryFragment extends Fragment {
             }
         });
 
+
+        //xóa từng item của recycalview
+        theLoaiAdapter.setOnDeleteItemClickListenner(new TheLoaiAdapter.OnDeleteItemClickListenner() {
+            @Override
+            public void OnDeleteItemClick(int position) {
+                //xóa khỏi mục recycalview
+                theLoaiAdapter.getSnapshots().getSnapshot(position).getRef().removeValue();
+            }
+        });
+
+
         return view;
 
 

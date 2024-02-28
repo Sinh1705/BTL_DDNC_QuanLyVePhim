@@ -1,29 +1,24 @@
 package com.example.myapplication;
 
 public class Phim {
-    private int hinh;
     private String ten;
     private String theloai;
     private String mota;
     private int gia;
     private String giokhoichieu;
 
-    public Phim(int hinh, String ten, String theloai, String mota, int gia, String giokhoichieu) {
-        this.hinh = hinh;
+    private String anhphim ;
+
+
+    public Phim(String ten, String theloai, String mota, int gia, String giokhoichieu, String anhphim) {
         this.ten = ten;
         this.theloai = theloai;
         this.mota = mota;
         this.gia = gia;
         this.giokhoichieu = giokhoichieu;
+        this.anhphim = anhphim;
     }
-
-    public int getHinh() {
-        return hinh;
-    }
-
-    public void setHinh(int hinh) {
-        this.hinh = hinh;
-    }
+    public Phim(){}
 
     public String getTen() {
         return ten;
@@ -49,7 +44,7 @@ public class Phim {
         this.mota = mota;
     }
 
-    public float getGia() {
+    public int getGia() {
         return gia;
     }
 
@@ -64,4 +59,15 @@ public class Phim {
     public void setGiokhoichieu(String giokhoichieu) {
         this.giokhoichieu = giokhoichieu;
     }
+
+    public String getAnhphim() {
+        return anhphim;
+    }
+
+    public void setAnhphim(String anhphim) {
+        this.anhphim = anhphim;
+    }
+
+
 }
+
