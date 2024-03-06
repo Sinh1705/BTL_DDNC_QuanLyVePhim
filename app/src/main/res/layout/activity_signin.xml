@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Đăng nhập"
+        android:layout_marginTop="150sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edt_signin_email"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email..."/>
+    <EditText
+        android:id="@+id/edt_signin_pass"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password..."/>
+    <LinearLayout
+        android:gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_margin="10sp"
+            android:text="Quản trị viên"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Người dùng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_signin"
+        android:text="ĐĂNG NHẬP TÀI KHOẢN"
+        android:layout_margin="10sp"
+        android:background="@drawable/custom_edt_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="#15A8EA"
+        android:layout_margin="10sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="Quên mật khẩu "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textViewRegister"
+            android:textSize="15sp"
+            android:text="Chưa có tài khoản?"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/textViewSignUp"
+            android:textColor="#EAC146"
+            android:textSize="15sp"
+            android:text="Đăng Ký"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/textViewRegister"
+            android:layout_marginStart="5dp"
+            android:layout_alignBottom="@id/textViewRegister"/>
+    </RelativeLayout>
+</LinearLayout>

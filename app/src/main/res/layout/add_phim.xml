@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"></Spinner>
 
     <EditText
-        android:id="@+id/edt_add_ten"
+        android:id="@+id/edt_add_tenphim"
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_marginStart="20sp"
@@ -102,7 +102,7 @@
         android:paddingStart="10sp" />
 
     <Button
-        android:id="@+id/btn_add_theloai"
+        android:id="@+id/btn_add_phim"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_marginStart="20sp"

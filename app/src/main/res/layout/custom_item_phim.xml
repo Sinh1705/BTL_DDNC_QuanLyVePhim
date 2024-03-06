@@ -80,19 +80,18 @@
     <ImageView
         android:layout_margin="20sp"
         android:id="@+id/img_delete"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/ic_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ImageView>
 
     <ImageView
-        android:layout_marginRight="20sp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/img_delete"
-        android:layout_marginBottom="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/img_delete"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20sp"
         android:src="@drawable/ic_fix_phim" />
     <View
         android:layout_below="@+id/img_phim"

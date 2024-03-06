@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +33,8 @@ public class HomeFragment extends Fragment {
       private PhimAdapter phimAdapter;
 
       private MainActivity mainActivity;//nhớ tạo biến môi trường
-
+      private SearchView searchView;
+      private FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
@@ -58,7 +62,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(phimAdapter);
 
 
-
+        //hiện thị thể loại lên flowlayout
         FlowLayout flowLayout = view.findViewById(R.id.flow_layout);
 
         FirebaseDatabase.getInstance().getReference().child("category")
@@ -90,6 +94,17 @@ public class HomeFragment extends Fragment {
 
                     }
                 });
+
+
+        //khi người dùng click vào floatingButton
+        floatingActionButton = view.findViewById(R.id.fabutton_phim);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mainActivity, AddPhim.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
