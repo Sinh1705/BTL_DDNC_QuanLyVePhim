@@ -55,6 +55,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignInActivity.this , SignupActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -65,6 +66,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SignInActivity.this,ForgetPassActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
