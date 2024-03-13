@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_home);
+        setContentView(R.layout.activity_theloai);
 
 //        recyclerView = findViewById(R.id.recyclerview_home);
 //        mListPhim = new ArrayList<>();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(linearLayoutManager);
 //        recyclerView.setAdapter(phimAdapter);
 
-        /*bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.view_pager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager.setAdapter(viewPagerAdapter);
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
             }
-        });*/
+        });
     }
 
 }
