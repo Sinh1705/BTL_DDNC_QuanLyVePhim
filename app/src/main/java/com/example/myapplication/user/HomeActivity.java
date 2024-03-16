@@ -33,7 +33,6 @@ public class HomeActivity extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private Category_Adapter category_adapter;
-    private PhimUserAdapter phimUserAdapter;
     private MainActivity mainActivity ; //nhớ tạo biến môi trường
     private SearchView searchView;
     private ViewPager2 viewPager2;
@@ -72,6 +71,7 @@ public class HomeActivity extends Fragment {
         category_adapter = new Category_Adapter(options);
         recyclerView.setAdapter(category_adapter);
 
+
        /* //phim
         recyclerView1 = view.findViewById(R.id.recycleview_phim);
         recyclerView1.setLayoutManager((new LinearLayoutManager(mainActivity)));
@@ -104,14 +104,13 @@ public class HomeActivity extends Fragment {
     public void onStart() {
         super.onStart();
         category_adapter.startListening();
-        phimUserAdapter.startListening();
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         category_adapter.stopListening();
-        phimUserAdapter.stopListening();
     }
 
     public void textSearch(String str){

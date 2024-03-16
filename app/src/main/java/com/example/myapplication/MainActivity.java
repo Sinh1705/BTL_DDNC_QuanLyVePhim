@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         //user
         bottomNavigationView = findViewById((R.id.bottom_navigation));
-        /*viewPager = findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
         viewPagerAdapterUser = new ViewPagerAdapterUser(getSupportFragmentManager(),getLifecycle());
         viewPager.setAdapter((viewPagerAdapterUser));
-        setUpViewPager();*/
+        setUpViewPager();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener(){
 
