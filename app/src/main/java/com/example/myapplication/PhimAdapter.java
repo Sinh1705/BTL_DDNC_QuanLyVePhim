@@ -59,7 +59,7 @@ public class PhimAdapter extends FirebaseRecyclerAdapter<Phim,PhimAdapter.ViewHo
             mota = itemView.findViewById(R.id.tv_mota);
             gia = itemView.findViewById(R.id.tv_gia);
             khoichieu = itemView.findViewById(R.id.tv_khoichieu);
-            anhphim = itemView.findViewById(R.id.img_phim);
+            anhphim = itemView.findViewById(R.id.img_theloai);
         }
     }
 }

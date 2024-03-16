@@ -44,7 +44,7 @@ public class Category_Adapter extends FirebaseRecyclerAdapter<com.example.myappl
 
     @SuppressLint("RecyclerView")
     @Override
-    protected void onBindViewHolder(@NonNull Category_Adapter.myViewHolder holder, int position, @NonNull TheLoai model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull TheLoai model) {
         holder.theloai.setText(model.getTheloai());
         Glide.with(holder.imageView.getContext())
                 .load(model.getLinkanh())

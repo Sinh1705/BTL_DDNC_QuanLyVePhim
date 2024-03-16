@@ -1,4 +1,4 @@
 package com.example.myapplication.user;
 
-public class Category_Activity {
+public class PhimUser_Activity {
 }

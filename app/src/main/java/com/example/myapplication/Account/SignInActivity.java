@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.HomeFragment;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.user.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -119,6 +120,9 @@ public class SignInActivity extends AppCompatActivity {
                             Intent intent = new Intent(SignInActivity.this , MainActivity.class);
                             startActivity(intent);
                         } else if (isUser && role.equals("user"))  {
+                            Toast.makeText(SignInActivity.this, "Lay du lieu thanh cong", Toast.LENGTH_SHORT).show();
+                            Intent intent1 = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent1);
 
 
                         } else {
