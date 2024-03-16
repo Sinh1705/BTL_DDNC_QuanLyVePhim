@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_category"
+    <item android:id="@+id/action_home"
         android:title="Trang chủ"
         android:icon="@drawable/ic_home"
         />
-    <item android:id="@+id/action_fastfood"
+    <item android:id="@+id/action_history"
         android:title="Lịch sử đặt vé"
         android:icon="@drawable/ic_history"
         />
-    <item android:id="@+id/action_home"
+    <item android:id="@+id/action_manage"
         android:title="Tài khoản"
         android:icon="@drawable/ic_manage_accounts"
         />

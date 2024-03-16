@@ -6,7 +6,7 @@
     android:backgroundTint="@color/white">
 
     <ImageView
-        android:id="@+id/img_phim"
+        android:id="@+id/img_theloai"
         android:layout_width="100dp"
         android:layout_height="110dp"
         android:src="@drawable/anh_1" />
@@ -14,7 +14,7 @@
         android:layout_marginLeft="5sp"
         android:id="@+id/liner_chitiet"
         android:orientation="vertical"
-        android:layout_toRightOf="@+id/img_phim"
+        android:layout_toRightOf="@+id/img_theloai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -94,7 +94,7 @@
         android:layout_marginRight="20sp"
         android:src="@drawable/ic_fix_phim" />
     <View
-        android:layout_below="@+id/img_phim"
+        android:layout_below="@+id/img_theloai"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

@@ -50,8 +50,8 @@ public class PhimUserAdapter extends FirebaseRecyclerAdapter<PhimUser,PhimUserAd
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ten = itemView.findViewById(R.id.txt_tenphim);
-            imageView = itemView.findViewById(R.id.img_phim);
+            ten = itemView.findViewById(R.id.txt_theloai);
+            imageView = itemView.findViewById(R.id.img_theloai);
         }
     }
 }
