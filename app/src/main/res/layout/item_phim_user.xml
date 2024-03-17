@@ -15,17 +15,17 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/img_theloai"
-            android:layout_width="wrap_content"
+            android:id="@+id/img_phim"
+            android:layout_width="match_parent"
             android:layout_height="75dp"
             app:srcCompat="@drawable/anh_1" />
 
         <TextView
-            android:id="@+id/txt_theloai"
+            android:id="@+id/txt_phim"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:gravity="center"
-            android:text="Hoạt Hình" />
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="KungFu Panda 4" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
