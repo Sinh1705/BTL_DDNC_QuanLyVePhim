@@ -8,6 +8,7 @@ public class Phim {
     private String giokhoichieu;
 
     private String anhphim ;
+    private String linkvideo;
 
 
     public Phim(String ten, String theloai, String mota, int gia, String giokhoichieu, String anhphim) {
@@ -68,6 +69,12 @@ public class Phim {
         this.anhphim = anhphim;
     }
 
+    public String getLinkvideo() {
+        return linkvideo;
+    }
 
+    public void setLinkvideo(String linkvideo) {
+        this.linkvideo = linkvideo;
+    }
 }
 

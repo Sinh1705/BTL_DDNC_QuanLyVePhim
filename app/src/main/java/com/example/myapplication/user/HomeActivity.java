@@ -116,7 +116,7 @@ public class HomeActivity extends Fragment {
         recyclerView1.setLayoutManager(new LinearLayoutManager(mainActivity,LinearLayoutManager.HORIZONTAL, false));
         FirebaseRecyclerOptions<Phim> options1 = new FirebaseRecyclerOptions.Builder<Phim>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), Phim.class).build();
-        phimUserAdapter = new PhimUserAdapter(options1);
+        phimUserAdapter = new PhimUserAdapter(options1,getContext());
         recyclerView1.setAdapter(phimUserAdapter);
 
         //tim kiem

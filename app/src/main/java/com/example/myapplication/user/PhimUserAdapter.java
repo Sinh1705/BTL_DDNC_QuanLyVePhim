@@ -1,5 +1,8 @@
 package com.example.myapplication.user;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +19,20 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class PhimUserAdapter extends FirebaseRecyclerAdapter<Phim,PhimUserAdapter.myViewHolder> {
+    private Context context;
+
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      * @param options
      */
-    public PhimUserAdapter(@NonNull FirebaseRecyclerOptions<Phim> options) {
+    public PhimUserAdapter(@NonNull FirebaseRecyclerOptions<Phim> options,Context context) {
         super(options);
+        this.context = context;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull Phim model) {
         holder.ten.setText(model.getTen());
@@ -34,6 +41,14 @@ public class PhimUserAdapter extends FirebaseRecyclerAdapter<Phim,PhimUserAdapte
                 .placeholder(R.drawable.anh_1) // Hiển thị ảnh này trong khi đang tải
                 .error(R.drawable.anh_1) // Hiển thị ảnh này nếu có lỗi khi tải
                 .into(holder.anhphim);
+        holder.anhphim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,Details_Film.class);
+                intent.putExtra("phim_id",getRef(position).getKey());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @NonNull
