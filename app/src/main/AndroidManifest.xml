@@ -7,7 +7,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Quan Ly Ve Phim"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
@@ -28,6 +28,7 @@
         <activity android:name=".Account.SignupActivity"/>
         <activity android:name=".Account.ForgetPassActivity"/>
         <activity android:name=".Account.ChangePassActivity"/>
+        <activity android:name=".user.Details_Category"></activity>
         <activity android:name=".MainActivity"/>
     </application>
 
