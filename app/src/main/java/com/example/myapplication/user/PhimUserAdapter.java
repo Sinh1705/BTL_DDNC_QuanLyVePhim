@@ -45,7 +45,7 @@ public class PhimUserAdapter extends FirebaseRecyclerAdapter<Phim,PhimUserAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,Details_Film.class);
-                intent.putExtra("phim_id",getRef(position).getKey());
+                intent.putExtra("phim_id",getRef(position).getKey()); //
                 context.startActivity(intent);
             }
         });
@@ -62,6 +62,7 @@ public class PhimUserAdapter extends FirebaseRecyclerAdapter<Phim,PhimUserAdapte
 
         TextView ten;
         ImageView anhphim;
+
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);

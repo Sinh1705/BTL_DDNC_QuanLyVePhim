@@ -14,7 +14,6 @@
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="50sp"/>
-
     <SearchView
         android:layout_below="@+id/tv_home_phim"
         android:layout_marginStart="10sp"
