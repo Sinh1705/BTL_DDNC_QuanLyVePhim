@@ -1,6 +1,8 @@
 package com.example.myapplication.user;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Category_Adapter extends FirebaseRecyclerAdapter<com.example.myapplication.TheLoai, Category_Adapter.myViewHolder> {
-
+    private Context context;
 
 
     /**
@@ -38,8 +40,10 @@ public class Category_Adapter extends FirebaseRecyclerAdapter<com.example.myappl
      *
      * @param options
      */
-    public Category_Adapter(@NonNull FirebaseRecyclerOptions<TheLoai> options) {
+    public Category_Adapter(@NonNull FirebaseRecyclerOptions<TheLoai> options, Context context) {
+
         super(options);
+        this.context = context;
     }
 
     @SuppressLint("RecyclerView")
@@ -51,6 +55,14 @@ public class Category_Adapter extends FirebaseRecyclerAdapter<com.example.myappl
                 .placeholder(R.drawable.anh_1) // Hiển thị ảnh này trong khi đang tải
                 .error(R.drawable.anh_1) // Hiển thị ảnh này nếu có lỗi khi tải
                 .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  =new Intent(context, Details_Category.class);
+                intent.putExtra("category_id", getRef(position).getKey());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @NonNull
