@@ -42,6 +42,7 @@ public class HomeActivity extends Fragment {
     private PhimUserAdapter phimUserAdapter;
     private Banner_Adapter bannerAdapter;
     private  List<String> imgbanner;
+    private List<String> categoryList;
     private Handler handler;
     private Runnable runnable;
     private int currentPage =0;
@@ -108,8 +109,12 @@ public class HomeActivity extends Fragment {
                 FirebaseRecyclerOptions.Builder<TheLoai>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("category"), TheLoai.class)
                 .build();
-        category_adapter = new Category_Adapter(options);
+        category_adapter = new Category_Adapter(options, getContext());
         recyclerView.setAdapter(category_adapter);
+
+
+
+
 
         //phim
         recyclerView1 = view.findViewById(R.id.recycleview_phim_user);
@@ -167,7 +172,7 @@ public class HomeActivity extends Fragment {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("category").orderByChild("theloai").startAt(str).endAt(str+"~"), TheLoai.class)
                         .build();
 
-        Category_Adapter categoryAdapter = new Category_Adapter(options);
+        Category_Adapter categoryAdapter = new Category_Adapter(options,getContext());
         categoryAdapter.startListening();
         recyclerView.setAdapter(categoryAdapter);
     }
