@@ -51,6 +51,7 @@ public class HomeActivity extends Fragment {
     private ViewPager2 viewPager2;
     private CircleIndicator3 indicator3;
     private DatabaseReference databaseRef;
+    private DatabaseReference databaseReference;
 
 
 
@@ -124,6 +125,8 @@ public class HomeActivity extends Fragment {
         phimUserAdapter = new PhimUserAdapter(options1,getContext());
         recyclerView1.setAdapter(phimUserAdapter);
 
+
+
         //tim kiem
         searchView = view.findViewById(R.id.search);
         searchView.clearFocus();
@@ -144,6 +147,7 @@ public class HomeActivity extends Fragment {
 
         return view;
     }
+
 
     @Override
     public void onDestroy() {

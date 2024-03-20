@@ -1,5 +1,6 @@
 package com.example.myapplication.user;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +76,14 @@ public class Details_Film extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 videoView.start();
+            }
+        });
+
+        btnDatve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Details_Film.this,Buy_StickActivity.class);
+                startActivity(intent);
             }
         });
 
