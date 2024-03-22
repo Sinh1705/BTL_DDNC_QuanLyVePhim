@@ -17,7 +17,7 @@ public class ViewPagerAdapterUser extends FragmentStateAdapter {
 public Fragment createFragment(int position) {
         switch (position){
 
-case 0: return new HomeActivity();
+            case 0: return new HomeActivity();
             case 1: return new HistoryActivity();
             case 2: return new ManangerActivity();
             default: return new HomeActivity();

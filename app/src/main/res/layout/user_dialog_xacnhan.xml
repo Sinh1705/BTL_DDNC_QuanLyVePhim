@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textView52"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20sp"
         android:padding="10dp"
         app:columnCount="2"
@@ -25,7 +25,7 @@
             android:text="Tên phim:" />
 
         <TextView
-            android:id="@+id/textView55"
+            android:id="@+id/dailog_tenphim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -37,7 +37,7 @@
             android:text="Khởi chiếu:" />
 
         <TextView
-            android:id="@+id/textView57"
+            android:id="@+id/dailog_khoichieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -49,7 +49,7 @@
             android:text="Phòng chiếu:" />
 
         <TextView
-            android:id="@+id/textView59"
+            android:id="@+id/dailog_phongchieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -61,7 +61,7 @@
             android:text="Giờ chiếu:" />
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/dailog_giochieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -73,7 +73,7 @@
             android:text="Số lượng vé:" />
 
         <TextView
-            android:id="@+id/textView63"
+            android:id="@+id/dailog_soluongve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -85,7 +85,7 @@
             android:text="Ghế đã chọn:" />
 
         <TextView
-            android:id="@+id/textView65"
+            android:id="@+id/dailog_ghechon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -97,7 +97,7 @@
             android:text="Thanh toán:" />
 
         <TextView
-            android:id="@+id/textView67"
+            android:id="@+id/dailog_thanhtoan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -135,12 +135,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView52"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="180dp"
         android:text="Tổng tiền:" />
 
     <TextView
-        android:id="@+id/textView69"
+        android:id="@+id/dailog_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView68"
