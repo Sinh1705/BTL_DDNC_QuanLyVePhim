@@ -83,6 +83,8 @@ public class Details_Film extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Details_Film.this,Buy_StickActivity.class);
+                intent.putExtra("tenphim",tvTen.getText());
+                intent.putExtra("gia",tvGia.getText());
                 startActivity(intent);
             }
         });

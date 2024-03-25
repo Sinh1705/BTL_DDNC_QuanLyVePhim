@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="wrap_content">
 
         <!-- Header Layout -->
         <LinearLayout
@@ -93,14 +91,6 @@
                 android:text="Chọn giờ chiếu phim"
                 android:textStyle="bold" />
 
-            <RadioGroup
-                android:id="@+id/radioGroupTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView26"
-                android:orientation="horizontal"
-                tools:ignore="ExtraText">
-
                 <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,7 +136,6 @@
                     android:layout_height="wrap_content"
                     android:text="10AM-11AM" />
                 </androidx.gridlayout.widget.GridLayout>
-            </RadioGroup>
         </RelativeLayout>
 
         <!-- Screen Layout -->
@@ -163,14 +152,6 @@
                 android:layout_height="wrap_content"
                 android:text="Chọn phòng xem phim"
                 android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupPhong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView25"
-                android:orientation="horizontal">
-
                 <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -185,7 +166,7 @@
                     app:rowCount="2">
                 <!-- Screens -->
                     <RadioButton
-                        android:id="@+id/checkBox21"
+                        android:id="@+id/radioButton21"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Phòng 1"
@@ -193,7 +174,7 @@
                         app:layout_rowWeight="1" />
 
                     <RadioButton
-                        android:id="@+id/checkBox22"
+                        android:id="@+id/radioButton22"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Phòng 2"
@@ -201,7 +182,7 @@
                         app:layout_rowWeight="1" />
 
                     <RadioButton
-                        android:id="@+id/checkBox23"
+                        android:id="@+id/radioButton23"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Phòng 3"
@@ -209,14 +190,13 @@
                         app:layout_rowWeight="1" />
 
                     <RadioButton
-                        android:id="@+id/checkBox24"
+                        android:id="@+id/radioButton24"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Phòng 4"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" />
                 </androidx.gridlayout.widget.GridLayout>
-            </RadioGroup>
         </RelativeLayout>
         <TextView
             android:layout_below="@+id/layout3"
@@ -271,100 +251,115 @@
                 android:layout_below="@id/textView28"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="10sp"
+                android:layout_marginStart="2sp"
                 android:layout_marginTop="20sp"
-                android:layout_marginEnd="10sp"
+                android:layout_marginEnd="5sp"
                 android:layout_marginBottom="10sp"
                 app:columnCount="5"
                 app:rowCount="3">
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_1"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="1" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_2"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="2" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_3"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="3" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_4"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="4" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_5"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="5" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_6"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="6" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_7"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="7" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_8"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="8" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_9"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="9" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_10"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="10" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_11"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="11" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_12"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="12" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_13"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="13" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_14"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="14" />
 
                 <Button
+                    android:backgroundTint="@color/default_seat_color"
                     android:id="@+id/btn_15"
-                    android:layout_width="70dp"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:text="15" />
 
@@ -382,4 +377,4 @@
             android:layout_below="@id/layout5"
             android:text="XÁC NHẬN" />
     </RelativeLayout>
-</ScrollView>
+
