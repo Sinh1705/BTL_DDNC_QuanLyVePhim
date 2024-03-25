@@ -9,15 +9,15 @@
     <!-- Các thành phần giao diện khác trong CardView -->
 
     <LinearLayout
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="190dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="5dp">
 
         <ImageView
             android:id="@+id/img_phim"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="160dp"
             app:srcCompat="@drawable/anh_1" />
 
         <TextView

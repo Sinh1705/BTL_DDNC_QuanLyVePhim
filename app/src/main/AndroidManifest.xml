@@ -29,6 +29,7 @@
         <activity android:name=".Account.ForgetPassActivity"/>
         <activity android:name=".Account.ChangePassActivity"/>
         <activity android:name=".user.Details_Category"></activity>
+        <activity android:name=".user.SeachActivity"></activity>
         <activity android:name=".MainActivity"/>
     </application>
 
