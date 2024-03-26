@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Phim;
+import com.example.myapplication.PhimAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.TheLoai;
+import com.example.myapplication.TheLoaiAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,15 +36,23 @@ public class Details_Category extends AppCompatActivity {
 
         String categoryId = getIntent().getStringExtra("category_id");
 
+        // Truy vấn Firebase để lấy tên của thể loại từ category_id
         FirebaseDatabase.getInstance().getReference().child("category").child(categoryId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            TheLoai theLoai = snapshot.getValue(TheLoai.class);
-                            if(theLoai!=null){
-                                tentheloai = theLoai.getTheloai();
-                            }
+                        if (snapshot.exists()) {
+
+                            String tenTheLoai = snapshot.child("theloai").getValue(String.class);
+                                // Truy vấn danh sách phim từ cơ sở dữ liệu Firebase bằng tên thể loại
+                            FirebaseRecyclerOptions<Phim> options =
+                                    new FirebaseRecyclerOptions.Builder<Phim>()
+                                            .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild("theloai").equalTo(tenTheLoai), Phim.class)
+                                            .build();
+
+                            phimUserAdapter = new PhimUserAdapter(options,Details_Category.this);
+                            phimUserAdapter.startListening();
+                            recyclerView.setAdapter(phimUserAdapter);
                         }
                     }
 
@@ -51,25 +61,21 @@ public class Details_Category extends AppCompatActivity {
                         // Xử lý khi có lỗi
                     }
                 });
-
-        //truy van ds phim thuoc the loai va hien thi
-        FirebaseRecyclerOptions<Phim> options = new FirebaseRecyclerOptions.Builder<Phim>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").child(tentheloai), Phim.class)
-                .build();
-        phimUserAdapter = new PhimUserAdapter(options, this);
-        recyclerView.setAdapter(phimUserAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        phimUserAdapter.startListening();
-
+        if (phimUserAdapter != null) {
+            phimUserAdapter.startListening();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        phimUserAdapter.stopListening();
+        if (phimUserAdapter != null) {
+            phimUserAdapter.stopListening();
+        }
     }
 }

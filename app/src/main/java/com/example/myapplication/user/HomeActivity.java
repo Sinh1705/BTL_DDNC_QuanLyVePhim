@@ -1,7 +1,6 @@
 package com.example.myapplication.user;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -121,7 +119,7 @@ public class HomeActivity extends Fragment {
 
         //phim
         recyclerView1 = view.findViewById(R.id.recycleview_phim_user);
-        recyclerView1.setLayoutManager(new GridLayoutManager(mainActivity,2));
+        recyclerView1.setLayoutManager(new LinearLayoutManager(mainActivity,LinearLayoutManager.HORIZONTAL, false));
         FirebaseRecyclerOptions<Phim> options1 = new FirebaseRecyclerOptions.Builder<Phim>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), Phim.class).build();
         phimUserAdapter = new PhimUserAdapter(options1,getContext());
@@ -133,13 +131,17 @@ public class HomeActivity extends Fragment {
         searchView = view.findViewById(R.id.search);
         searchView.clearFocus();
 
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if(view.hasFocus()){
-                    Intent intent = new Intent(getActivity(), SeachActivity.class);
-                    startActivity(intent);
-                }
+            public boolean onQueryTextSubmit(String s) {
+                textSearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                textSearch(s);
+                return false;
             }
         });
 
@@ -166,6 +168,17 @@ public class HomeActivity extends Fragment {
         super.onStop();
         category_adapter.stopListening();
         phimUserAdapter.startListening();
+    }
+
+    public void textSearch(String str){
+        FirebaseRecyclerOptions<TheLoai> options =
+                new FirebaseRecyclerOptions.Builder<TheLoai>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("category").orderByChild("theloai").startAt(str).endAt(str+"~"), TheLoai.class)
+                        .build();
+
+        Category_Adapter categoryAdapter = new Category_Adapter(options,getContext());
+        categoryAdapter.startListening();
+        recyclerView.setAdapter(categoryAdapter);
     }
 
     /*public void onAttach(@NonNull Context context) {

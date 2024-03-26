@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
       private RecyclerView recyclerView;
       private PhimAdapter phimAdapter;
 
-      private MainActivity mainActivity;//nhớ tạo biến môi trường
+      private mainAD main;//nhớ tạo biến môi trường
       private SearchView searchView;
       private FloatingActionButton floatingActionButton;
 
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         recyclerView = view.findViewById(R.id.recyclerview_home);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
+        recyclerView.setLayoutManager(new LinearLayoutManager(main));
 
         FirebaseRecyclerOptions<Phim> options = new FirebaseRecyclerOptions.Builder<Phim>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), snapshot -> {
@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mainActivity, AddPhim.class);
+                Intent intent = new Intent(main, AddPhim.class);
                 startActivity(intent);
             }
         });
@@ -123,8 +123,8 @@ public class HomeFragment extends Fragment {
 
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
+        if (context instanceof mainAD) {
+            main = (mainAD) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement MainActivity");
         }
