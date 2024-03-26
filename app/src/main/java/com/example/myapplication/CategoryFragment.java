@@ -25,7 +25,7 @@ public class CategoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private TheLoaiAdapter theLoaiAdapter;
 
-    private MainActivity mainActivity ; //nhớ tạo biến môi trường
+    private mainAD mainAD ; //nhớ tạo biến môi trường
 
     private SearchView searchView;
     private FloatingActionButton floatingActionButton;
@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category,container,false);
         recyclerView = view.findViewById(R.id.recyclerview_theloai);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mainAD));
         FirebaseRecyclerOptions<TheLoai> options = new
                 FirebaseRecyclerOptions.Builder<TheLoai>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("category"),TheLoai.class)
@@ -68,7 +68,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("CategoryFragment", "FloatingActionButton clicked");
-                Intent intent = new Intent(mainActivity, AddTheLoai.class);
+                Intent intent = new Intent(mainAD, AddTheLoai.class);
                 startActivity(intent);
             }
         });
@@ -116,8 +116,8 @@ public class CategoryFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d("CategoryFragment", "onAttach called");
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
+        if (context instanceof mainAD) {
+            mainAD = (mainAD) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement MainActivity");
         }
