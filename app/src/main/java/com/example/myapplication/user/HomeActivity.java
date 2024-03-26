@@ -1,6 +1,7 @@
 package com.example.myapplication.user;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.myapplication.AddPhim;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.Phim;
 import com.example.myapplication.R;
@@ -129,19 +131,28 @@ public class HomeActivity extends Fragment {
 
         //tim kiem
         searchView = view.findViewById(R.id.search);
-        searchView.clearFocus();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        searchView.clearFocus();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                textSearch(s);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                textSearch(s);
+//                return false;
+//            }
+//        });
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                textSearch(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                textSearch(s);
-                return false;
+            public void onFocusChange(View view, boolean b) {
+                if(view.hasFocus()){
+                    Intent intent = new Intent(getActivity(), AddPhim.class);
+                    startActivity(intent);
+                }
             }
         });
 
