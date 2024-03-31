@@ -116,17 +116,19 @@ public class SignInActivity extends AppCompatActivity {
                             role = "admin";
                         }
 
-                        if (isAdmin && role.equals("admin") ) {
+                    /*    if (isAdmin && role.equals("admin") ) {
                             Toast.makeText(SignInActivity.this, "Lấy dữ liệu từ firebase thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignInActivity.this , mainAD.class);
                             startActivity(intent);
-                        } else if (isUser && role.equals("user"))  {
+                        }
+*/
+                        if (isUser && role.equals("user"))  {
                             Toast.makeText(SignInActivity.this, "Lay du lieu thanh cong", Toast.LENGTH_SHORT).show();
                             Intent intent1 = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent1);
+                        }
 
-
-                        } else {
+                        else {
                             // Xử lý khi có dữ liệu null hoặc không lấy được từ Firebase
                             Toast.makeText(SignInActivity.this, "Không thể lấy dữ liệu vai trò", Toast.LENGTH_SHORT).show();
                         }

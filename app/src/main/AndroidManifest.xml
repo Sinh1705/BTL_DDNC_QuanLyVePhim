@@ -31,7 +31,7 @@
         <activity android:name=".user.Details_Category"></activity>
         <activity android:name=".user.SeachActivity"></activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".mainAD"></activity>
+        <activity android:name=".mainAD"    ></activity>
     </application>
 
 </manifest>
