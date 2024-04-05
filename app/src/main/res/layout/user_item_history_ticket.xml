@@ -34,7 +34,7 @@
             android:text="Mã:" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/tv_history_mave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView32"
@@ -54,7 +54,7 @@
             android:text="Tên phim" />
 
         <TextView
-            android:id="@+id/textView35"
+            android:id="@+id/tv_history_tenve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView34"
@@ -74,7 +74,7 @@
             android:text="Khởi chiếu:" />
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/tv_history_khoichieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView36"
@@ -87,14 +87,14 @@
             android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView37"
+            android:layout_below="@id/tv_history_khoichieu"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Phòng chiếu:" />
 
         <TextView
-            android:id="@+id/textView39"
+            android:id="@+id/tv_history_phong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView38"
@@ -107,7 +107,7 @@
             android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -117,7 +117,7 @@
             android:id="@+id/textView42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -127,17 +127,17 @@
             android:id="@+id/textView43"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Số lượng vé:" />
 
         <TextView
-            android:id="@+id/textView44"
+            android:id="@+id/tv_history_soluong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -147,17 +147,17 @@
             android:id="@+id/textView45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Ghế đã chọn" />
 
         <TextView
-            android:id="@+id/textView46"
+            android:id="@+id/tv_history_ghe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -167,7 +167,7 @@
             android:id="@+id/textView47"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -177,7 +177,7 @@
             android:id="@+id/textView48"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -187,17 +187,17 @@
             android:id="@+id/textView49"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Ngày:" />
 
         <TextView
-            android:id="@+id/textView50"
+            android:id="@+id/tv_history_ngaydat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView39"
+            android:layout_below="@id/tv_history_phong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -230,7 +230,7 @@
         android:text="Tổng tiền:" />
 
     <TextView
-        android:id="@+id/textView51"
+        android:id="@+id/tv_history_tongtien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView41"

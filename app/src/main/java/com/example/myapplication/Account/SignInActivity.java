@@ -46,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edt_signin_email);
         edtPass = findViewById(R.id.edt_signin_pass);
         btnSignin = findViewById(R.id.btn_signin);
-        radioGroup = findViewById(R.id.radioGroup_signin);
+        //radioGroup = findViewById(R.id.radioGroup_signin);
         relativeLayout = findViewById(R.id.layout_signin);
         tvLayoutForgetpass = findViewById(R.id.layout_forgetpass);
 
@@ -103,36 +103,27 @@ public class SignInActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // Lấy dữ liệu boolean từ Firebase
-                        Boolean isAdmin = snapshot.child("admin").getValue(Boolean.class);
-                        Boolean isUser = snapshot.child("user").getValue(Boolean.class);
-
-
-                        int selectedRadioId = radioGroup.getCheckedRadioButtonId();
-                        String role = "";
-                        if (selectedRadioId == R.id.radio_signin_user) {
-                            role = "user";
-                        } else if (selectedRadioId == R.id.radio_signin_admin) {
-                            role = "admin";
-                        }
-
-                    /*    if (isAdmin && role.equals("admin") ) {
-                            Toast.makeText(SignInActivity.this, "Lấy dữ liệu từ firebase thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(SignInActivity.this , mainAD.class);
-                            startActivity(intent);
-                        }
-*/
-                        if (isUser && role.equals("user"))  {
-                            Toast.makeText(SignInActivity.this, "Lay du lieu thanh cong", Toast.LENGTH_SHORT).show();
-                            Intent intent1 = new Intent(SignInActivity.this, MainActivity.class);
-                            startActivity(intent1);
-                        }
-
-                        else {
-                            // Xử lý khi có dữ liệu null hoặc không lấy được từ Firebase
-                            Toast.makeText(SignInActivity.this, "Không thể lấy dữ liệu vai trò", Toast.LENGTH_SHORT).show();
-                        }
+                        if (snapshot.exists()) {
+                            String role = snapshot.getValue(String.class);
+                            if (role != null) {
+                                if (role.equals("user")) {
+                                    // Xử lý khi vai trò là user
+                                    Toast.makeText(SignInActivity.this, "Lấy dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                                    Intent intent1 = new Intent(SignInActivity.this, MainActivity.class);
+                                    startActivity(intent1);
+                                } else if (role.equals("admin")) {
+                                    // Xử lý khi vai trò là admin
+                                    Toast.makeText(SignInActivity.this, "Lấy dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                                    Intent intent1 = new Intent(SignInActivity.this, mainAD.class);
+                                    startActivity(intent1);
+                                } else {
+                                    // Xử lý khi vai trò không xác định
+                                    Toast.makeText(SignInActivity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                     }
+                    }
+
 
 
                     @Override

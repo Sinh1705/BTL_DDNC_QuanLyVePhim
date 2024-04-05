@@ -27,15 +27,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 public class Buy_StickActivity extends AppCompatActivity {
     private TextView tvTen, tvGia;
@@ -439,11 +445,30 @@ public class Buy_StickActivity extends AppCompatActivity {
                 float  tongtien = giave * soluongghe ;
                 total.setText(String.valueOf(tongtien));
 
+                //thêm trường mã vé phim , ngày đặt , tên tài khoản đặt , số lượng vé
+                //mã vé randoom
+                Random random = new Random();
+                int randomNumber = random.nextInt(90000)+10000;
+
+                //lấy ra ngày đặt hiện tại
+                Date currentDate = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String dateString = dateFormat.format(currentDate);
+
+                //lấy ra tên tài khoản
+                String tenTK = "";
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                if(firebaseUser != null){
+                    tenTK = firebaseUser.getEmail();
+                }
+
                 // Tạo dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(Buy_StickActivity.this);
                 builder.setView(view1);
 
 
+                String finalTenTK = tenTK;
+                int finalSoluongghe = soluongghe;
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -453,6 +478,11 @@ public class Buy_StickActivity extends AppCompatActivity {
                         map.put("gio",giochieu.getText().toString());
                         map.put("ghe",selectedSeats);
                         map.put("tongtien",tongtien);
+                        map.put("maphim",randomNumber);
+                        map.put("ngaydat",dateString.toString());
+                        map.put("taikhoandat", finalTenTK.toString());
+                        map.put("soluongve", finalSoluongghe);
+
                         FirebaseDatabase.getInstance().getReference().child("ticket").push()
                                 .setValue(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
