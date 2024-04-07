@@ -29,13 +29,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/colorPrimaryDark"
-        app:menu="@menu/user_menu_bottom" />
+
 
     <RadioButton
         android:id="@+id/radioButton13"
@@ -56,7 +50,8 @@
         android:background="#838080"
         android:orientation="vertical"></LinearLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_history_recycalview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
