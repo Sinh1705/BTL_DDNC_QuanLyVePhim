@@ -1,16 +1,14 @@
 package com.example.myapplication.user;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,15 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.myapplication.AddTheLoai;
-import com.example.myapplication.HomeFragment;
 import com.example.myapplication.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -50,6 +42,8 @@ public class Buy_StickActivity extends AppCompatActivity {
     private RadioButton radioButton11, radioButton12, radioButton13, radioButton14;
     private RadioButton radioButton21, radioButton22, radioButton23, radioButton24;
     private ArrayList<String> selectedSeats;
+    private ArrayList<String> buttonTextList;
+    private TextView hienthi;
     private Button btnDatVe;
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +77,76 @@ public class Buy_StickActivity extends AppCompatActivity {
         Button btn14 = findViewById(R.id.btn_14);
         Button btn15 = findViewById(R.id.btn_15);
 
-        btnDatVe = findViewById(R.id.btn_XacNhan);
+        buttonTextList= new ArrayList<>();
 
+        String textForBtn1 = "1";
+        btn1.setText(textForBtn1);
+        buttonTextList.add(textForBtn1);
+
+        String textForBtn2 = "2";
+        btn2.setText(textForBtn2);
+        buttonTextList.add(textForBtn2);
+
+        String textForBtn3 = "3";
+        btn3.setText(textForBtn3);
+        buttonTextList.add(textForBtn3);
+
+        String textForBtn4 = "4";
+        btn4.setText(textForBtn4);
+        buttonTextList.add(textForBtn4);
+
+        String textForBtn5 = "5";
+        btn5.setText(textForBtn5);
+        buttonTextList.add(textForBtn5);
+
+        String textForBtn6 = "6";
+        btn6.setText(textForBtn6);
+        buttonTextList.add(textForBtn6);
+
+        String textForBtn7 = "7";
+        btn7.setText(textForBtn7);
+        buttonTextList.add(textForBtn7);
+
+        String textForBtn8 = "8";
+        btn8.setText(textForBtn8);
+        buttonTextList.add(textForBtn8);
+
+        String textForBtn9 = "9";
+        btn9.setText(textForBtn9);
+        buttonTextList.add(textForBtn9);
+
+        String textForBtn10 = "10";
+        btn10.setText(textForBtn10);
+        buttonTextList.add(textForBtn10);
+
+        String textForBtn11 = "11";
+        btn11.setText(textForBtn11);
+        buttonTextList.add(textForBtn11);
+
+        String textForBtn12 = "12";
+        btn12.setText(textForBtn12);
+        buttonTextList.add(textForBtn12);
+
+        String textForBtn13 = "13";
+        btn13.setText(textForBtn13);
+        buttonTextList.add(textForBtn13);
+
+        String textForBtn14 = "14";
+        btn14.setText(textForBtn14);
+        buttonTextList.add(textForBtn14);
+
+        String textForBtn15 = "15";
+        btn15.setText(textForBtn15);
+        buttonTextList.add(textForBtn15);
+
+
+
+        btnDatVe = findViewById(R.id.btn_XacNhan);
+        hienthi = findViewById(R.id.textView25);
         //gán giá trị cho tên phim, giá
         String ten = getIntent().getStringExtra("tenphim");
         String gia = getIntent().getStringExtra("gia");
+        String strKhoiChieu = getIntent().getStringExtra("khoichieu");
         tvTen.setText(ten);
         tvGia.setText(String.valueOf(gia));
 
@@ -190,10 +249,64 @@ public class Buy_StickActivity extends AppCompatActivity {
                 room = "phòng 4";
             }
         });
+
         selectedSeats = new ArrayList<>();
 
+        String phong = "phòng 1";
+        String gio = "7AM-8AM";
 
-        queryBookedSeatsForTimeAndRoom(time,room);
+        FirebaseDatabase.getInstance().getReference().child("ticket")
+                .orderByChild("tenphim").equalTo(ten)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<String> bookedSeats = new ArrayList<>();
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            // Kiểm tra xem có tồn tại "phong" và "gio" trong dataSnapshot không
+                            if (!dataSnapshot.hasChild("phong") || !dataSnapshot.hasChild("gio")) {
+                                continue; // Bỏ qua nếu không tồn tại các trường phong hoặc gio
+                            }
+
+                            // Lấy giá trị của "phong" và "gio" từ dataSnapshot
+                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
+                            String gioFromDB = dataSnapshot.child("gio").getValue(String.class);
+
+                            // Kiểm tra và xử lý trường hợp phongFromDB hoặc gioFromDB là null
+                            if (phongFromDB == null || gioFromDB == null) {
+                                continue; // Bỏ qua nếu giá trị là null
+                            }
+
+                            // Kiểm tra điều kiện phòng và khung giờ
+                            if (!phongFromDB.equals(phong) || !gioFromDB.equals(gio)) {
+                                continue; // Bỏ qua vé không phù hợp và tiếp tục vòng lặp
+                            }
+
+                            // Lấy danh sách các ghế đã đặt
+                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
+                            if (gheSnapshot.exists()) {
+                                for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
+                                    String seat = seatSnapshot.getValue(String.class); // Lấy key của ghế
+                                    bookedSeats.add(seat); // Thêm ghế vào danh sách đã đặt
+                                }
+                            }
+                        }
+
+                        // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
+                        String seatsString = convertSeatListToString(bookedSeats);
+                        hienthi.setText(seatsString);
+
+                        updateSeatButtons(bookedSeats,buttonTextList);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Xử lý lỗi nếu cần
+                        Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
+                    }
+                });
+
+        //queryBookedSeatsForTimeAndRoom(time,room);
 
 
 
@@ -201,12 +314,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_1")){
+                if(selectedSeats.contains("1")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_1");
+                    selectedSeats.remove("1");
                     btn1.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_1");
+                    selectedSeats.add("1");
                     btn1.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -215,12 +328,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_2")){
+                if(selectedSeats.contains("2")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_2");
+                    selectedSeats.remove("2");
                     btn2.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_2");
+                    selectedSeats.add("2");
                     btn2.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -229,12 +342,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_3")){
+                if(selectedSeats.contains("3")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_3");
+                    selectedSeats.remove("3");
                     btn3.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_3");
+                    selectedSeats.add("3");
                     btn3.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -243,12 +356,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_4")){
+                if(selectedSeats.contains("4")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_4");
+                    selectedSeats.remove("4");
                     btn4.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_4");
+                    selectedSeats.add("4");
                     btn4.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -257,12 +370,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_5")){
+                if(selectedSeats.contains("5")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_5");
+                    selectedSeats.remove("5");
                     btn5.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_5");
+                    selectedSeats.add("5");
                     btn5.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -271,12 +384,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_6")){
+                if(selectedSeats.contains("6")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_6");
+                    selectedSeats.remove("6");
                     btn6.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_6");
+                    selectedSeats.add("6");
                     btn6.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -285,12 +398,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_7")){
+                if(selectedSeats.contains("7")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_7");
+                    selectedSeats.remove("7");
                     btn7.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_7");
+                    selectedSeats.add("7");
                     btn7.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
 
                 }
@@ -300,12 +413,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_8")){
+                if(selectedSeats.contains("8")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_8");
+                    selectedSeats.remove("8");
                     btn8.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_8");
+                    selectedSeats.add("8");
                     btn8.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -314,12 +427,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_9")){
+                if(selectedSeats.contains("9")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_9");
+                    selectedSeats.remove("9");
                     btn9.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_9");
+                    selectedSeats.add("9");
                     btn9.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -328,12 +441,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_10")){
+                if(selectedSeats.contains("10")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_10");
+                    selectedSeats.remove("10");
                     btn10.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_10");
+                    selectedSeats.add("10");
                     btn10.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -342,12 +455,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_11")){
+                if(selectedSeats.contains("11")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_11");
+                    selectedSeats.remove("11");
                     btn11.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_11");
+                    selectedSeats.add("11");
                     btn11.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -356,12 +469,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_12")){
+                if(selectedSeats.contains("12")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_12");
+                    selectedSeats.remove("12");
                     btn12.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_12");
+                    selectedSeats.add("12");
                     btn12.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -370,12 +483,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_13")){
+                if(selectedSeats.contains("13")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_13");
+                    selectedSeats.remove("13");
                     btn13.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_13");
+                    selectedSeats.add("13");
                     btn13.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -384,12 +497,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_14")){
+                if(selectedSeats.contains("14")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
                     selectedSeats.remove("btn_14");
                     btn14.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_14");
+                    selectedSeats.add("14");
                     btn14.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -398,12 +511,12 @@ public class Buy_StickActivity extends AppCompatActivity {
         btn15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedSeats.contains("btn_15")){
+                if(selectedSeats.contains("15")){
                     // Nếu đã chọn, hãy bỏ chọn ghế và cập nhật giao diện người dùng
-                    selectedSeats.remove("btn_15");
+                    selectedSeats.remove("15");
                     btn15.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                 }else {
-                    selectedSeats.add("btn_15");
+                    selectedSeats.add("15");
                     btn15.setBackgroundColor(getResources().getColor(R.color.selected_seat_color));
                 }
             }
@@ -420,9 +533,12 @@ public class Buy_StickActivity extends AppCompatActivity {
                 TextView phong = view1.findViewById(R.id.dailog_phongchieu);
                 TextView ghe = view1.findViewById(R.id.dailog_ghechon);
                 TextView total = view1.findViewById(R.id.dailog_total);
+                TextView khoichieu = view1.findViewById(R.id.dailog_khoichieu);
+                TextView soluong = view1.findViewById(R.id.dailog_soluongve);
                 tenphim.setText(tvTen.getText().toString());
                 giochieu.setText(time);
                 phong.setText(room);
+                khoichieu.setText(strKhoiChieu);
 
                 //xử lý chọn danh sách ghế
                 StringBuilder sb = new StringBuilder();
@@ -469,6 +585,7 @@ public class Buy_StickActivity extends AppCompatActivity {
 
                 String finalTenTK = tenTK;
                 int finalSoluongghe = soluongghe;
+                soluong.setText(String.valueOf(finalSoluongghe));
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -482,6 +599,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                         map.put("ngaydat",dateString.toString());
                         map.put("taikhoandat", finalTenTK.toString());
                         map.put("soluongve", finalSoluongghe);
+                        map.put("khoichieu",khoichieu.getText().toString());
 
                         FirebaseDatabase.getInstance().getReference().child("ticket").push()
                                 .setValue(map)
@@ -515,63 +633,70 @@ public class Buy_StickActivity extends AppCompatActivity {
             }
         });
     }
-    private void queryBookedSeatsForTimeAndRoom(String time, String room) {
-        FirebaseDatabase.getInstance().getReference().child("ticket")
-                .orderByChild("gio").equalTo(time)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // Danh sách ghế đã đặt trong thời gian và phòng đã chọn
-                        List<String> bookedSeats = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
-                            // Kiểm tra nếu phòng từ cơ sở dữ liệu không trùng khớp với phòng đã chọn
-                            if (!phongFromDB.equals(room)) {
-                                continue; // Bỏ qua vé này và tiếp tục vòng lặp
-                            }
 
-                            // Lấy danh sách ghế từ cơ sở dữ liệu
-                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
-                            if (gheSnapshot.exists()) {
-                                // Kiểm tra xem có nhiều ghế không
-                                if (gheSnapshot.getChildrenCount() > 1) {
-                                    // Nếu có nhiều ghế, lặp qua từng ghế
-                                    for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
-                                        String seat = seatSnapshot.getValue(String.class);
-                                        // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
-                                        if (!bookedSeats.contains(seat)) {
-                                            bookedSeats.add(seat);
-                                        }
-                                    }
-                                } else {
-                                    // Nếu chỉ có một ghế, lấy giá trị ghế trực tiếp
-                                    String seat = gheSnapshot.getValue(String.class);
-                                    // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
-                                    if (!bookedSeats.contains(seat)) {
-                                        bookedSeats.add(seat);
-                                    }
-                                }
-                            }
-                        }
-
-                        // Cập nhật giao diện người dùng để ngăn chọn những ghế đã đặt
-                        updateSeatButtons(bookedSeats);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Xử lý lỗi nếu cần
-                    }
-                });
+    private String convertSeatListToString(ArrayList<String> bookedSeats) {
+        return TextUtils.join(", ", bookedSeats);
     }
 
-    private void updateSeatButtons(List<String> bookedSeats) {
-        if (selectedSeats == null || selectedSeats.isEmpty()) {
+//    private void queryBookedSeatsForTimeAndRoom(String time, String room) {
+//        FirebaseDatabase.getInstance().getReference().child("ticket")
+//                .orderByChild("gio").equalTo(time)
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        // Danh sách ghế đã đặt trong thời gian và phòng đã chọn
+//                        List<String> bookedSeats = new ArrayList<>();
+//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
+//                            // Kiểm tra nếu phòng từ cơ sở dữ liệu không trùng khớp với phòng đã chọn
+//                            if (!phongFromDB.equals(room)) {
+//                                continue; // Bỏ qua vé này và tiếp tục vòng lặp
+//                            }
+//
+//                            // Lấy danh sách ghế từ cơ sở dữ liệu
+//                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
+//                            if (gheSnapshot.exists()) {
+//                                // Kiểm tra xem có nhiều ghế không
+//                                if (gheSnapshot.getChildrenCount() > 1) {
+//                                    // Nếu có nhiều ghế, lặp qua từng ghế
+//                                    for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
+//                                        String seat = seatSnapshot.getValue(String.class);
+//                                        // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
+//                                        if (!bookedSeats.contains(seat)) {
+//                                            bookedSeats.add(seat);
+//                                        }
+//                                    }
+//                                } else {
+//                                    // Nếu chỉ có một ghế, lấy giá trị ghế trực tiếp
+//                                    String seat = gheSnapshot.getValue(String.class);
+//                                    // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
+//                                    if (!bookedSeats.contains(seat)) {
+//                                        bookedSeats.add(seat);
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                        // Cập nhật giao diện người dùng để ngăn chọn những ghế đã đặt
+//                        updateSeatButtons(bookedSeats);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        // Xử lý lỗi nếu cần
+//                    }
+//                });
+//    }
+
+
+
+
+    private void updateSeatButtons(ArrayList<String> bookedSeats, ArrayList<String> buttonTextList) {
+        if (buttonTextList == null || buttonTextList.isEmpty()) {
             // Nếu không có ghế được chọn, không cần thực hiện bất kỳ hành động nào
             return;
         }
-
-        for (String seatId : selectedSeats) {
+        for (String seatId : buttonTextList) {
             if (seatId != null) {
                 // Kiểm tra xem ghế đã được đặt hay chưa
                 boolean isSeatBooked = false;
@@ -594,6 +719,9 @@ public class Buy_StickActivity extends AppCompatActivity {
                         seatButton.setBackgroundColor(getResources().getColor(R.color.default_seat_color));
                     }
                 }
+            }else {
+                Toast.makeText(Buy_StickActivity.this, "Danh sach ghe rong", Toast.LENGTH_SHORT).show();
+
             }
         }
     }
@@ -602,35 +730,35 @@ public class Buy_StickActivity extends AppCompatActivity {
     @Nullable
     private Button getSeatButtonById(@NonNull String seatId) {
         switch (seatId){
-            case "btn_1" :
+            case "1" :
                 return findViewById(R.id.btn_1);
-            case "btn_2" :
+            case "2" :
                 return findViewById(R.id.btn_2);
-            case "btn_3" :
+            case "3" :
                 return findViewById(R.id.btn_3);
-            case "btn_4" :
+            case "4" :
                 return findViewById(R.id.btn_4);
-            case "btn_5" :
+            case "5" :
                 return findViewById(R.id.btn_5);
-            case "btn_6" :
+            case "6" :
                 return findViewById(R.id.btn_6);
-            case "btn_7" :
+            case "7" :
                 return findViewById(R.id.btn_7);
-            case "btn_8" :
+            case "8" :
                 return findViewById(R.id.btn_8);
-            case "btn_9" :
+            case "9" :
                 return findViewById(R.id.btn_9);
-            case "btn_10" :
+            case "10" :
                 return findViewById(R.id.btn_10);
-            case "btn_11" :
+            case "11" :
                 return findViewById(R.id.btn_11);
-            case "btn_12" :
+            case "12" :
                 return findViewById(R.id.btn_12);
-            case "btn_13" :
+            case "13" :
                 return findViewById(R.id.btn_13);
-            case "btn_14" :
+            case "14" :
                 return findViewById(R.id.btn_14);
-            case "btn_15" :
+            case "15" :
                 return findViewById(R.id.btn_15);
             default:
                 return null;
