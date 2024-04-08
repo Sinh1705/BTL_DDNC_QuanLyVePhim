@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -29,7 +31,8 @@ import java.util.List;
 
 public class SeachActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
-        private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
+    private ImageView img_quaylai;
     private  SearchView searchView;
 
     @Override
@@ -37,12 +40,20 @@ public class SeachActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_phim);
 
-
+        img_quaylai = findViewById(R.id.img_quaylai);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         searchView = findViewById(R.id.search_view);
         searchView.clearFocus();
+
+        img_quaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SeachActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

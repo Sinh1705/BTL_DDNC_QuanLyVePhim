@@ -118,17 +118,23 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="#000000"
-        android:orientation="vertical">
+        android:layout_marginEnd="0dp">
+
+        <ImageView
+            android:id="@+id/img_quaylai"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            app:srcCompat="@drawable/car_ui_icon_arrow_back" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="-40dp"
             android:gravity="center"
             android:text="Chi tiết phim"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
