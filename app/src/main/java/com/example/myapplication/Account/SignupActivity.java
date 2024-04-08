@@ -2,6 +2,8 @@ package com.example.myapplication.Account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,17 +59,49 @@ public class SignupActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Khởi tạo DatabaseReference
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        //gán sự kiện cho radiogroup
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                //lấy ra radiobutton được chọn
-//                RadioButton radioButton = findViewById(i);
-//                // xử lý trên radio được chọn
-//                String selectedOption = radioButton.getText().toString();
-//            }
-//        });
+
+        edtPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String password = edtPass.getText().toString();
+
+                if (password.length() < 6) {
+                    edtPass.setError("Mật khẩu phải có ít nhất 6 ký tự");
+                }
+
+                if (!password.matches(".*[A-Z].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một chữ in hoa");
+                    return;
+                }
+
+                if (!password.matches(".*[a-z].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một chữ thường");
+                    return;
+                }
+
+                if (!password.matches(".*[@#$%^&+=].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một kí tự đặc biệt");
+                    return;
+                }
+
+                if (!password.matches(".*\\d.*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một số");
+                    return;
+                }
+
+            }
+        });
+
 
         //đăng ký và check tài khoản
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -92,11 +126,11 @@ public class SignupActivity extends AppCompatActivity {
                                         //cập nhật quyền
                                         //dataSnapshot.getRef().child("role").child(finalRole).setValue(true);
                                         Toast.makeText(SignupActivity.this, "Email đăng kí đã tồn tại", Toast.LENGTH_SHORT).show();
-                                }
+                                    }
                                 }
                                 else{
-                                        registeraccount(email,pass,role);
-                                    }
+                                    registeraccount(email,pass,role);
+                                }
                             }
 
                             @Override
@@ -107,8 +141,6 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
     private void registeraccount(String email, String password , String role){

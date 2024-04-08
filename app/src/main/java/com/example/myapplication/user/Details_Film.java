@@ -27,7 +27,7 @@ public class Details_Film extends AppCompatActivity {
     private TextView tvTen,tvTheLoai, tvKhoiChieu, tvGia, tvMota;
     private Button btnTrailer, btnDatve;
     private VideoView videoView;
-    private ImageView imgphim;
+    private ImageView imgphim, img_quaylai;
     private DatabaseReference mDatabase;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,15 @@ public class Details_Film extends AppCompatActivity {
         btnDatve = findViewById(R.id.btn_datve);
         videoView = findViewById(R.id.video_trailer);
         imgphim = findViewById(R.id.detail_image);
+        img_quaylai = findViewById(R.id.img_quaylai);
+
+        img_quaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Details_Film.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         //lấy id phim từ intent phimUserAdapter
         String phimID = getIntent().getStringExtra("phim_id");
         //truy vấn dữ liệu từ firebase

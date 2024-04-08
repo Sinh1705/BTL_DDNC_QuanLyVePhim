@@ -72,11 +72,13 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = edtEmail.getText().toString();
                 String password = edtPass.getText().toString();
+
                 mAuth.signInWithEmailAndPassword(email,password)
                         .addOnCompleteListener(SignInActivity.this,new OnCompleteListener<AuthResult>() {
                             @Override
@@ -121,7 +123,7 @@ public class SignInActivity extends AppCompatActivity {
                                     Toast.makeText(SignInActivity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                    }
+                        }
                     }
 
 
