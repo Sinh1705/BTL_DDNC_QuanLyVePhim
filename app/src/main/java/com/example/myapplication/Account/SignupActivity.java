@@ -2,6 +2,8 @@ package com.example.myapplication.Account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
 
         edtEmail = findViewById(R.id.edt_signup_email);
         edtPass = findViewById(R.id.edt_signup_pass);
-        radioGroup = findViewById(R.id.radioGroup_signup);
+        //radioGroup = findViewById(R.id.radioGroup_signup);
         btnSignup = findViewById(R.id.btn_signup);
         relativeLayout = findViewById(R.id.layout_signup);
 
@@ -57,17 +59,49 @@ public class SignupActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Khởi tạo DatabaseReference
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        //gán sự kiện cho radiogroup
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        edtPass.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                //lấy ra radiobutton được chọn
-                RadioButton radioButton = findViewById(i);
-                // xử lý trên radio được chọn
-                String selectedOption = radioButton.getText().toString();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String password = edtPass.getText().toString();
+
+                if (password.length() < 6) {
+                    edtPass.setError("Mật khẩu phải có ít nhất 6 ký tự");
+                }
+
+                if (!password.matches(".*[A-Z].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một chữ in hoa");
+                    return;
+                }
+
+                if (!password.matches(".*[a-z].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một chữ thường");
+                    return;
+                }
+
+                if (!password.matches(".*[@#$%^&+=].*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một kí tự đặc biệt");
+                    return;
+                }
+
+                if (!password.matches(".*\\d.*")) {
+                    edtPass.setError("Mật khẩu phải có ít nhất một số");
+                    return;
+                }
+
             }
         });
+
 
         //đăng ký và check tài khoản
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -75,17 +109,10 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = edtEmail.getText().toString();
                 String pass = edtPass.getText().toString();
-                String role = "";
-                int selectedRadioId = radioGroup.getCheckedRadioButtonId();
-                if(selectedRadioId == R.id.radio_signup_user){
-                    role = "user";
-                }else if(selectedRadioId == R.id.radio_signup_admin){
-                    role = "admin";
-                }
-
+                String role = "user";
 
                 //kiểm tra email đã tồn tại trong realtimedatabase chưa
-                String finalRole = role;
+                //String finalRole = role;
                 databaseReference.child("users").orderByChild("email").equalTo(email)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -94,16 +121,16 @@ public class SignupActivity extends AppCompatActivity {
                                     //email đã tồn tại cập nhât quyền cho tài khoản hiện tại
                                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                                         //lấy ra ID người dùng
-                                        String userID = dataSnapshot.getKey();
+                                        //String userID = dataSnapshot.getKey();
 
                                         //cập nhật quyền
-                                        dataSnapshot.getRef().child("role").child(finalRole).setValue(true);
-                                        Toast.makeText(SignupActivity.this, "Cập nhật quyền thành công", Toast.LENGTH_SHORT).show();
-                                }
+                                        //dataSnapshot.getRef().child("role").child(finalRole).setValue(true);
+                                        Toast.makeText(SignupActivity.this, "Email đăng kí đã tồn tại", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 else{
-                                        registeraccount(email,pass,finalRole);
-                                    }
+                                    registeraccount(email,pass,role);
+                                }
                             }
 
                             @Override
@@ -114,8 +141,6 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
     private void registeraccount(String email, String password , String role){
@@ -131,7 +156,7 @@ public class SignupActivity extends AppCompatActivity {
                             // Tạo một nút mới trong Realtime Database dưới đường dẫn "users"
                             databaseReference.child("users").child(userId).child("email").setValue(email);
                             databaseReference.child("users").child(userId).child("password").setValue(password);
-                            databaseReference.child("users").child(userId).child("role").child(role).setValue(true);
+                            databaseReference.child("users").child(userId).child("role").setValue(role);
 
                             Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         } else {

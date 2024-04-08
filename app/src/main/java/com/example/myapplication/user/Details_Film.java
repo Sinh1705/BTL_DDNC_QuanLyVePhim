@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Phim;
 import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ public class Details_Film extends AppCompatActivity {
     private TextView tvTen,tvTheLoai, tvKhoiChieu, tvGia, tvMota;
     private Button btnTrailer, btnDatve;
     private VideoView videoView;
+    private ImageView imgphim, img_quaylai;
     private DatabaseReference mDatabase;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,16 @@ public class Details_Film extends AppCompatActivity {
         btnTrailer = findViewById(R.id.btn_trailer);
         btnDatve = findViewById(R.id.btn_datve);
         videoView = findViewById(R.id.video_trailer);
+        imgphim = findViewById(R.id.detail_image);
+        img_quaylai = findViewById(R.id.img_quaylai);
+
+        img_quaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Details_Film.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         //lấy id phim từ intent phimUserAdapter
         String phimID = getIntent().getStringExtra("phim_id");
         //truy vấn dữ liệu từ firebase
@@ -52,6 +65,10 @@ public class Details_Film extends AppCompatActivity {
                                 tvKhoiChieu.setText(phim.getGiokhoichieu());
                                 tvGia.setText(String.valueOf(phim.getGia()));
                                 tvMota.setText(phim.getMota());
+
+
+
+                                Glide.with(Details_Film.this).load(phim.getAnhphim()).into(imgphim);
 
                                 Uri uri = Uri.parse(phim.getLinkvideo());
                                 videoView.setVideoURI(uri);
@@ -85,6 +102,7 @@ public class Details_Film extends AppCompatActivity {
                 Intent intent = new Intent(Details_Film.this,Buy_StickActivity.class);
                 intent.putExtra("tenphim",tvTen.getText());
                 intent.putExtra("gia",tvGia.getText());
+                intent.putExtra("khoichieu",tvKhoiChieu.getText());
                 startActivity(intent);
             }
         });

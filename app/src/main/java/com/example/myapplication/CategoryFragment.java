@@ -25,7 +25,7 @@ public class CategoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private TheLoaiAdapter theLoaiAdapter;
 
-    private MainActivity mainActivity ; //nhớ tạo biến môi trường
+    private mainAD mainActivity ; //nhớ tạo biến môi trường
 
     private SearchView searchView;
     private FloatingActionButton floatingActionButton;
@@ -116,8 +116,8 @@ public class CategoryFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d("CategoryFragment", "onAttach called");
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
+        if (context instanceof mainAD) {
+            mainActivity = (mainAD) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement MainActivity");
         }

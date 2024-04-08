@@ -23,7 +23,7 @@ public class ManagerFragment extends Fragment {
     private TextView tvEmail;
 
     private FirebaseUser mAuth;
-    private MainActivity mainActivity;
+    private mainAD mainActivity;
 
     @Nullable
     @Override
@@ -65,8 +65,8 @@ public class ManagerFragment extends Fragment {
     //nhớ tạo onAttach
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
+        if (context instanceof mainAD) {
+            mainActivity = (mainAD) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement MainActivity");
         }
