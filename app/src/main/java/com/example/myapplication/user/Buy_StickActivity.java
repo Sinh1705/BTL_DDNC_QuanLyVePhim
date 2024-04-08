@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +51,9 @@ public class Buy_StickActivity extends AppCompatActivity {
     private String room = "";
     private RadioButton radioButton11, radioButton12, radioButton13, radioButton14;
     private RadioButton radioButton21, radioButton22, radioButton23, radioButton24;
+    private TextView hienthi;
     private ArrayList<String> selectedSeats;
+
     private Button btnDatVe;
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,7 @@ public class Buy_StickActivity extends AppCompatActivity {
         Button btn15 = findViewById(R.id.btn_15);
 
         btnDatVe = findViewById(R.id.btn_XacNhan);
+        hienthi = findViewById(R.id.textView26);
 
         //gán giá trị cho tên phim, giá
         String ten = getIntent().getStringExtra("tenphim");
@@ -159,6 +164,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 1";
+
             }
         });
 
@@ -169,6 +175,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 2";
+
             }
         });
         radioButton23.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +185,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton22.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 3";
+
             }
         });
 
@@ -188,12 +196,62 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton21.setChecked(false);
                 room = "phòng 4";
+
             }
         });
         selectedSeats = new ArrayList<>();
 
-
         queryBookedSeatsForTimeAndRoom(time,room);
+        String phong = "phòng 1";
+        String gio = "7AM-8AM";
+
+        FirebaseDatabase.getInstance().getReference().child("ticket")
+                .orderByChild("gio").equalTo(gio)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<String> bookedSeats = new ArrayList<>();
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            // Kiểm tra xem có tồn tại "phong" và "phim" trong dataSnapshot không
+                            if (!dataSnapshot.hasChild("phong") && !dataSnapshot.hasChild("phim")) {
+                                continue; // Bỏ qua nếu không tồn tại các trường phong hoặc phim
+                            }
+
+                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
+                            String movieFromDB = dataSnapshot.child("phim").getValue(String.class);
+
+                            // Kiểm tra và xử lý trường hợp phongFromDB hoặc movieFromDB là null
+                            if (phongFromDB == null || movieFromDB == null) {
+                                continue; // Bỏ qua nếu giá trị là null
+                            }
+
+                            // Kiểm tra điều kiện phòng và tên phim
+                            if (!phongFromDB.equals(phong) || !movieFromDB.equals(tvTen.getText().toString())) {
+                                continue; // Bỏ qua vé không phù hợp và tiếp tục vòng lặp
+                            }
+
+                            // Lấy danh sách các ghế đã đặt
+                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
+                            if (gheSnapshot.exists()) {
+                                for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
+                                    String seat = seatSnapshot.getKey(); // Lấy key của ghế
+                                    bookedSeats.add(seat); // Thêm ghế vào danh sách đã đặt
+                                }
+                            }
+                        }
+
+                        // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
+                        String seatsString = convertSeatListToString(bookedSeats);
+                        hienthi.setText(seatsString);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Xử lý lỗi nếu cần
+                        Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
+                    }
+                });
 
 
 
@@ -635,6 +693,23 @@ public class Buy_StickActivity extends AppCompatActivity {
             default:
                 return null;
         }
+    }
+
+
+
+    private String convertSeatsToString(List<String> bookedSeats) {
+        StringBuilder seatsString = new StringBuilder();
+        for (String seat : bookedSeats) {
+            if (seatsString.length() > 0) {
+                seatsString.append(", "); // Thêm dấu phẩy và khoảng trắng để phân tách các ghế
+            }
+            seatsString.append(seat); // Thêm ghế vào chuỗi
+        }
+        return seatsString.toString();
+    }
+
+    private String convertSeatListToString(ArrayList<String> danhSachGhe) {
+        return TextUtils.join(", ", danhSachGhe);
     }
 
 }
