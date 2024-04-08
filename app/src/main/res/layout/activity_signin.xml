@@ -26,28 +26,28 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password..."/>
-    <RadioGroup
-        android:layout_gravity="center"
-        android:id="@+id/radioGroup_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<!--    <RadioGroup-->
+<!--        android:layout_gravity="center"-->
+<!--        android:id="@+id/radioGroup_signin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
 
-        <RadioButton
-            android:layout_margin="10sp"
-            android:id="@+id/radio_signin_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quản trị viên" />
+<!--        <RadioButton-->
+<!--            android:layout_margin="10sp"-->
+<!--            android:id="@+id/radio_signin_admin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Quản trị viên" />-->
 
-        <RadioButton
-            android:layout_margin="10sp"
-            android:id="@+id/radio_signin_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Người dùng" />
+<!--        <RadioButton-->
+<!--            android:layout_margin="10sp"-->
+<!--            android:id="@+id/radio_signin_user"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Người dùng" />-->
 
-    </RadioGroup>
+<!--    </RadioGroup>-->
     <Button
         android:id="@+id/btn_signin"
         android:text="ĐĂNG NHẬP TÀI KHOẢN"

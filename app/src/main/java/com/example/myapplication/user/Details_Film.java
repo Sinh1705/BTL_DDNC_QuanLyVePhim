@@ -25,9 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Details_Film extends AppCompatActivity {
     private TextView tvTen,tvTheLoai, tvKhoiChieu, tvGia, tvMota;
-    private ImageView imgPhim;
     private Button btnTrailer, btnDatve;
     private VideoView videoView;
+    private ImageView imgphim;
     private DatabaseReference mDatabase;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +40,7 @@ public class Details_Film extends AppCompatActivity {
         btnTrailer = findViewById(R.id.btn_trailer);
         btnDatve = findViewById(R.id.btn_datve);
         videoView = findViewById(R.id.video_trailer);
-        imgPhim = findViewById(R.id.detail_image);
-
+        imgphim = findViewById(R.id.detail_image);
         //lấy id phim từ intent phimUserAdapter
         String phimID = getIntent().getStringExtra("phim_id");
         //truy vấn dữ liệu từ firebase
@@ -57,10 +56,10 @@ public class Details_Film extends AppCompatActivity {
                                 tvKhoiChieu.setText(phim.getGiokhoichieu());
                                 tvGia.setText(String.valueOf(phim.getGia()));
                                 tvMota.setText(phim.getMota());
-                                //imgPhim.setImageURI(Uri.parse(phim.getAnhphim()));
-                                Glide.with(Details_Film.this)
-                                        .load(phim.getAnhphim())
-                                        .into(imgPhim);
+
+
+
+                                Glide.with(Details_Film.this).load(phim.getAnhphim()).into(imgphim);
 
                                 Uri uri = Uri.parse(phim.getLinkvideo());
                                 videoView.setVideoURI(uri);
@@ -94,6 +93,7 @@ public class Details_Film extends AppCompatActivity {
                 Intent intent = new Intent(Details_Film.this,Buy_StickActivity.class);
                 intent.putExtra("tenphim",tvTen.getText());
                 intent.putExtra("gia",tvGia.getText());
+                intent.putExtra("khoichieu",tvKhoiChieu.getText());
                 startActivity(intent);
             }
         });

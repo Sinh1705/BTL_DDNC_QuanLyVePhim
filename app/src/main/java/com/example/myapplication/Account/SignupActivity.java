@@ -37,7 +37,7 @@ public class SignupActivity extends AppCompatActivity {
 
         edtEmail = findViewById(R.id.edt_signup_email);
         edtPass = findViewById(R.id.edt_signup_pass);
-        radioGroup = findViewById(R.id.radioGroup_signup);
+        //radioGroup = findViewById(R.id.radioGroup_signup);
         btnSignup = findViewById(R.id.btn_signup);
         relativeLayout = findViewById(R.id.layout_signup);
 
@@ -59,15 +59,15 @@ public class SignupActivity extends AppCompatActivity {
         // Khởi tạo DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //gán sự kiện cho radiogroup
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                //lấy ra radiobutton được chọn
-                RadioButton radioButton = findViewById(i);
-                // xử lý trên radio được chọn
-                String selectedOption = radioButton.getText().toString();
-            }
-        });
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                //lấy ra radiobutton được chọn
+//                RadioButton radioButton = findViewById(i);
+//                // xử lý trên radio được chọn
+//                String selectedOption = radioButton.getText().toString();
+//            }
+//        });
 
         //đăng ký và check tài khoản
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -75,17 +75,10 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = edtEmail.getText().toString();
                 String pass = edtPass.getText().toString();
-                String role = "";
-                int selectedRadioId = radioGroup.getCheckedRadioButtonId();
-                if(selectedRadioId == R.id.radio_signup_user){
-                    role = "user";
-                }else if(selectedRadioId == R.id.radio_signup_admin){
-                    role = "admin";
-                }
-
+                String role = "user";
 
                 //kiểm tra email đã tồn tại trong realtimedatabase chưa
-                String finalRole = role;
+                //String finalRole = role;
                 databaseReference.child("users").orderByChild("email").equalTo(email)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -94,15 +87,15 @@ public class SignupActivity extends AppCompatActivity {
                                     //email đã tồn tại cập nhât quyền cho tài khoản hiện tại
                                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                                         //lấy ra ID người dùng
-                                        String userID = dataSnapshot.getKey();
+                                        //String userID = dataSnapshot.getKey();
 
                                         //cập nhật quyền
-                                        dataSnapshot.getRef().child("role").child(finalRole).setValue(true);
-                                        Toast.makeText(SignupActivity.this, "Cập nhật quyền thành công", Toast.LENGTH_SHORT).show();
+                                        //dataSnapshot.getRef().child("role").child(finalRole).setValue(true);
+                                        Toast.makeText(SignupActivity.this, "Email đăng kí đã tồn tại", Toast.LENGTH_SHORT).show();
                                 }
                                 }
                                 else{
-                                        registeraccount(email,pass,finalRole);
+                                        registeraccount(email,pass,role);
                                     }
                             }
 
@@ -131,7 +124,7 @@ public class SignupActivity extends AppCompatActivity {
                             // Tạo một nút mới trong Realtime Database dưới đường dẫn "users"
                             databaseReference.child("users").child(userId).child("email").setValue(email);
                             databaseReference.child("users").child(userId).child("password").setValue(password);
-                            databaseReference.child("users").child(userId).child("role").child(role).setValue(true);
+                            databaseReference.child("users").child(userId).child("role").setValue(role);
 
                             Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         } else {
