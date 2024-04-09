@@ -39,12 +39,16 @@ public class Buy_StickActivity extends AppCompatActivity {
     private TextView tvTen, tvGia;
     private String time = "";
     private String room = "";
+    private String time1 = "";
+    private String room1 = "";
     private RadioButton radioButton11, radioButton12, radioButton13, radioButton14;
     private RadioButton radioButton21, radioButton22, radioButton23, radioButton24;
     private ArrayList<String> selectedSeats;
     private ArrayList<String> buttonTextList;
-    private TextView hienthi;
+    private TextView tv_gio, tv_phong;
     private Button btnDatVe;
+
+    private boolean isTimeAndRoomSelected = false;
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +146,8 @@ public class Buy_StickActivity extends AppCompatActivity {
 
 
         btnDatVe = findViewById(R.id.btn_XacNhan);
-        hienthi = findViewById(R.id.textView25);
+        tv_gio = findViewById(R.id.textView26);
+        tv_phong = findViewById(R.id.textView25);
         //gán giá trị cho tên phim, giá
         String ten = getIntent().getStringExtra("tenphim");
         String gia = getIntent().getStringExtra("gia");
@@ -161,7 +166,8 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton13.setChecked(false);
                 radioButton14.setChecked(false);
                 time ="7AM-8AM";
-                //handleSeats();
+                //handleSeats()
+                selecttime(time);
             }
 
 //            private void handleSeats() {
@@ -182,6 +188,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton13.setChecked(false);
                 radioButton14.setChecked(false);
                 time ="8AM-9AM";
+                selecttime(time);
             }
         });
 
@@ -194,6 +201,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton12.setChecked(false);
                 radioButton14.setChecked(false);
                 time ="9AM-10AM";
+                selecttime(time);
             }
         });
 
@@ -206,6 +214,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton12.setChecked(false);
                 radioButton13.setChecked(false);
                 time ="10AM-11AM";
+                selecttime(time);
             }
         });
 
@@ -218,6 +227,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 1";
+                slecttime(room);
             }
         });
 
@@ -228,6 +238,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 2";
+                slecttime(room);
             }
         });
         radioButton23.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +248,7 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton22.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 3";
+                slecttime(room);
             }
         });
 
@@ -247,67 +259,67 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton21.setChecked(false);
                 room = "phòng 4";
+                slecttime(room);
             }
         });
 
         selectedSeats = new ArrayList<>();
 
-        String phong = "phòng 1";
-        String gio = "7AM-8AM";
-
-        FirebaseDatabase.getInstance().getReference().child("ticket")
-                .orderByChild("tenphim").equalTo(ten)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        ArrayList<String> bookedSeats = new ArrayList<>();
-
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            // Kiểm tra xem có tồn tại "phong" và "gio" trong dataSnapshot không
-                            if (!dataSnapshot.hasChild("phong") || !dataSnapshot.hasChild("gio")) {
-                                continue; // Bỏ qua nếu không tồn tại các trường phong hoặc gio
-                            }
-
-                            // Lấy giá trị của "phong" và "gio" từ dataSnapshot
-                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
-                            String gioFromDB = dataSnapshot.child("gio").getValue(String.class);
-
-                            // Kiểm tra và xử lý trường hợp phongFromDB hoặc gioFromDB là null
-                            if (phongFromDB == null || gioFromDB == null) {
-                                continue; // Bỏ qua nếu giá trị là null
-                            }
-
-                            // Kiểm tra điều kiện phòng và khung giờ
-                            if (!phongFromDB.equals(phong) || !gioFromDB.equals(gio)) {
-                                continue; // Bỏ qua vé không phù hợp và tiếp tục vòng lặp
-                            }
-
-                            // Lấy danh sách các ghế đã đặt
-                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
-                            if (gheSnapshot.exists()) {
-                                for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
-                                    String seat = seatSnapshot.getValue(String.class); // Lấy key của ghế
-                                    bookedSeats.add(seat); // Thêm ghế vào danh sách đã đặt
-                                }
-                            }
-                        }
-
-                        // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
-                        String seatsString = convertSeatListToString(bookedSeats);
-                        hienthi.setText(seatsString);
-
-                        updateSeatButtons(bookedSeats,buttonTextList);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Xử lý lỗi nếu cần
-                        Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
-                    }
-                });
+//        String phong = "phòng 1";
+//        String gio = "7AM-8AM";
+//        FirebaseDatabase.getInstance().getReference().child("ticket")
+//                .orderByChild("tenphim").equalTo(ten)
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        ArrayList<String> bookedSeats = new ArrayList<>();
+//
+//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                            // Kiểm tra xem có tồn tại "phong" và "gio" trong dataSnapshot không
+//                            if (!dataSnapshot.hasChild("phong") || !dataSnapshot.hasChild("gio")) {
+//                                continue; // Bỏ qua nếu không tồn tại các trường phong hoặc gio
+//                            }
+//
+//                            // Lấy giá trị của "phong" và "gio" từ dataSnapshot
+//                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
+//                            String gioFromDB = dataSnapshot.child("gio").getValue(String.class);
+//
+//                            // Kiểm tra và xử lý trường hợp phongFromDB hoặc gioFromDB là null
+//                            if (phongFromDB == null || gioFromDB == null) {
+//                                continue; // Bỏ qua nếu giá trị là null
+//                            }
+//
+//                            // Kiểm tra điều kiện phòng và khung giờ
+//                            if (!phongFromDB.equals(tv_phong.getText()) || !gioFromDB.equals(tv_gio.getText())) {
+//                                continue; // Bỏ qua vé không phù hợp và tiếp tục vòng lặp
+//                            }
+//
+//                            // Lấy danh sách các ghế đã đặt
+//                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
+//                            if (gheSnapshot.exists()) {
+//                                for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
+//                                    String seat = seatSnapshot.getValue(String.class); // Lấy key của ghế
+//                                    bookedSeats.add(seat); // Thêm ghế vào danh sách đã đặt
+//                                }
+//                            }
+//                        }
+//
+//                        // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
+//                        String seatsString = convertSeatListToString(bookedSeats);
+//                        //hienthi.setText(seatsString);
+//
+//                        updateSeatButtons(bookedSeats,buttonTextList);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        // Xử lý lỗi nếu cần
+//                        Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
+//                    }
+//                });
 
         //queryBookedSeatsForTimeAndRoom(time,room);
-
+        checkTimeAndRoom();
 
 
 
@@ -634,59 +646,63 @@ public class Buy_StickActivity extends AppCompatActivity {
         });
     }
 
+    private void checkTimeAndRoom() {
+        if (!time.isEmpty() && !room.isEmpty()) {
+            // Đã chọn cả giờ và phòng, thực hiện truy vấn Firebase để kiểm tra ghế đã đặt
+            isTimeAndRoomSelected = true;
+
+            FirebaseDatabase.getInstance().getReference().child("ticket")
+                    .orderByChild("tenphim").equalTo(tvTen.getText().toString())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            ArrayList<String> bookedSeats = new ArrayList<>();
+
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String gioFromDB = dataSnapshot.child("gio").getValue(String.class);
+                                String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
+
+                                // Kiểm tra nếu giờ và phòng trong Firebase khớp với giờ và phòng đã chọn
+                                if (gioFromDB != null && phongFromDB != null &&
+                                        gioFromDB.equals(time1) && phongFromDB.equals(room1)) {
+
+                                    // Lấy danh sách các ghế đã đặt
+                                    DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
+                                    if (gheSnapshot.exists()) {
+                                        for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
+                                            String seat = seatSnapshot.getValue(String.class);
+                                            bookedSeats.add(seat);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
+                            updateSeatButtons(bookedSeats, buttonTextList);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Xử lý lỗi nếu có
+                            Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
+                        }
+                    });
+        }
+    }
+
+    private void slecttime(String room) {
+        room1 = room;
+        checkTimeAndRoom();
+    }
+
+    private void selecttime(String time) {
+        time1 = time;
+        checkTimeAndRoom();
+    }
+
     private String convertSeatListToString(ArrayList<String> bookedSeats) {
         return TextUtils.join(", ", bookedSeats);
     }
-
-//    private void queryBookedSeatsForTimeAndRoom(String time, String room) {
-//        FirebaseDatabase.getInstance().getReference().child("ticket")
-//                .orderByChild("gio").equalTo(time)
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        // Danh sách ghế đã đặt trong thời gian và phòng đã chọn
-//                        List<String> bookedSeats = new ArrayList<>();
-//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
-//                            // Kiểm tra nếu phòng từ cơ sở dữ liệu không trùng khớp với phòng đã chọn
-//                            if (!phongFromDB.equals(room)) {
-//                                continue; // Bỏ qua vé này và tiếp tục vòng lặp
-//                            }
-//
-//                            // Lấy danh sách ghế từ cơ sở dữ liệu
-//                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
-//                            if (gheSnapshot.exists()) {
-//                                // Kiểm tra xem có nhiều ghế không
-//                                if (gheSnapshot.getChildrenCount() > 1) {
-//                                    // Nếu có nhiều ghế, lặp qua từng ghế
-//                                    for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
-//                                        String seat = seatSnapshot.getValue(String.class);
-//                                        // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
-//                                        if (!bookedSeats.contains(seat)) {
-//                                            bookedSeats.add(seat);
-//                                        }
-//                                    }
-//                                } else {
-//                                    // Nếu chỉ có một ghế, lấy giá trị ghế trực tiếp
-//                                    String seat = gheSnapshot.getValue(String.class);
-//                                    // Kiểm tra xem ghế đã tồn tại trong bookedSeats chưa
-//                                    if (!bookedSeats.contains(seat)) {
-//                                        bookedSeats.add(seat);
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                        // Cập nhật giao diện người dùng để ngăn chọn những ghế đã đặt
-//                        updateSeatButtons(bookedSeats);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        // Xử lý lỗi nếu cần
-//                    }
-//                });
-//    }
 
 
 
