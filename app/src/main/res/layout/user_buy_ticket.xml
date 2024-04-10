@@ -344,6 +344,7 @@
             android:text="150 000 VNĐ / 1 vé"
             app:layout_constraintStart_toEndOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
