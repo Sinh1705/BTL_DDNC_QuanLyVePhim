@@ -34,6 +34,7 @@ public class SeachActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ImageView img_quaylai;
     private  SearchView searchView;
+    private PhimUserAdapter phimUserAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +58,11 @@ public class SeachActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                /*FirebaseRecyclerOptions<Phim> options1 = new FirebaseRecyclerOptions.Builder<Phim>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), Phim.class).build();
+                searchview_adapter adapter1 = new searchview_adapter(options1);
+                adapter1.startListening();
+                mRecyclerView.setAdapter(adapter1);*/
                 searchPhim(s);
                 return true;
 
@@ -64,6 +70,11 @@ public class SeachActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                /*FirebaseRecyclerOptions<Phim> options1 = new FirebaseRecyclerOptions.Builder<Phim>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), Phim.class).build();
+                searchview_adapter adapter1 = new searchview_adapter(options1);
+                adapter1.startListening();
+                mRecyclerView.setAdapter(adapter1);*/
                 searchPhim(s);
                 return false;
             }
@@ -72,8 +83,11 @@ public class SeachActivity extends AppCompatActivity {
     }
 
     private void searchPhim(String s) {
+        String searchKeyword = s.toLowerCase(); // Chuyển đổi từ khóa tìm kiếm về chữ thường để tìm kiếm không phân biệt hoa thường
+
+
         FirebaseRecyclerOptions<Phim> options = new FirebaseRecyclerOptions.Builder<Phim>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild("ten").startAt(s).endAt(s+"~"),Phim.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild("ten").startAt(searchKeyword).endAt(searchKeyword+"~"),Phim.class)
                 .build();
         searchview_adapter adapter = new searchview_adapter(options);
         adapter.setOnItemClickListener(new searchview_adapter.OnItemClickListener() {
@@ -87,4 +101,5 @@ public class SeachActivity extends AppCompatActivity {
         adapter.startListening();
         mRecyclerView.setAdapter(adapter);
     }
+
 }

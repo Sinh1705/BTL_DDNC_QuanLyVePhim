@@ -8,7 +8,7 @@
         android:title="Lịch sử đặt vé"
         android:icon="@drawable/ic_history"
         />
-    <item android:id="@+id/action_manage"
+    <item android:id="@+id/action_manager"
         android:title="Tài khoản"
         android:icon="@drawable/ic_manage_accounts"
         />
