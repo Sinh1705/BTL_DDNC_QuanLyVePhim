@@ -59,7 +59,7 @@ public class Details_Category extends AppCompatActivity {
 
                             //truy van ds phim thuoc the loai va hien thi
                             FirebaseRecyclerOptions<Phim> options = new FirebaseRecyclerOptions.Builder<Phim>()
-                                    .setQuery(FirebaseDatabase.getInstance().getReference().child("phim"), Phim.class)
+                                    .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild(categoryId), Phim.class)
                                     .build();
                             phimUserAdapter = new PhimUserAdapter(options, Details_Category.this);
                             phimUserAdapter.startListening();

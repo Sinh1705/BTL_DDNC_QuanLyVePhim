@@ -41,7 +41,6 @@ public class HistoryFragment extends Fragment {
         super.onStart();
         historyAdmin_adapter.startListening();
 
-
     }
 
     @Override
