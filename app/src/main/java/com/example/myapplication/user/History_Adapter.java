@@ -40,6 +40,7 @@ public class History_Adapter extends FirebaseRecyclerAdapter<Ve,History_Adapter.
         holder.soluongve.setText(String.valueOf(model.getSoluongve()));
         holder.tenphim.setText(model.getTenphim());
         holder.tongtien.setText(String.valueOf(model.getTongtien()));
+        holder.khoichieu.setText(model.getKhoichieu());
         // Lấy danh sách ghế từ đối tượng Ve
         ArrayList<String> danhSachGhe = model.getGhe();
 
