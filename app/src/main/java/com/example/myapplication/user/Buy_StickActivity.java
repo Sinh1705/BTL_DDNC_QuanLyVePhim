@@ -43,9 +43,7 @@ public class Buy_StickActivity extends AppCompatActivity {
     private String room1 = "";
     private RadioButton radioButton11, radioButton12, radioButton13, radioButton14;
     private RadioButton radioButton21, radioButton22, radioButton23, radioButton24;
-    private TextView hienthi;
     private ArrayList<String> selectedSeats;
-
     private ArrayList<String> buttonTextList;
     private TextView tv_gio, tv_phong;
     private Button btnDatVe;
@@ -83,8 +81,6 @@ public class Buy_StickActivity extends AppCompatActivity {
         Button btn14 = findViewById(R.id.btn_14);
         Button btn15 = findViewById(R.id.btn_15);
 
-        btnDatVe = findViewById(R.id.btn_XacNhan);
-        hienthi = findViewById(R.id.textView26);
         buttonTextList= new ArrayList<>();
 
         String textForBtn1 = "1";
@@ -231,8 +227,6 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 1";
-
-
                 slecttime(room);
             }
         });
@@ -244,8 +238,6 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 2";
-
-
                 slecttime(room);
             }
         });
@@ -256,7 +248,6 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton22.setChecked(false);
                 radioButton24.setChecked(false);
                 room = "phòng 3";
-
                 slecttime(room);
             }
         });
@@ -268,62 +259,6 @@ public class Buy_StickActivity extends AppCompatActivity {
                 radioButton23.setChecked(false);
                 radioButton21.setChecked(false);
                 room = "phòng 4";
-
-            }
-        });
-        selectedSeats = new ArrayList<>();
-
-        queryBookedSeatsForTimeAndRoom(time,room);
-        String phong = "phòng 1";
-        String gio = "7AM-8AM";
-
-        FirebaseDatabase.getInstance().getReference().child("ticket")
-                .orderByChild("gio").equalTo(gio)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        ArrayList<String> bookedSeats = new ArrayList<>();
-
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            // Kiểm tra xem có tồn tại "phong" và "phim" trong dataSnapshot không
-                            if (!dataSnapshot.hasChild("phong") && !dataSnapshot.hasChild("phim")) {
-                                continue; // Bỏ qua nếu không tồn tại các trường phong hoặc phim
-                            }
-
-                            String phongFromDB = dataSnapshot.child("phong").getValue(String.class);
-                            String movieFromDB = dataSnapshot.child("phim").getValue(String.class);
-
-                            // Kiểm tra và xử lý trường hợp phongFromDB hoặc movieFromDB là null
-                            if (phongFromDB == null || movieFromDB == null) {
-                                continue; // Bỏ qua nếu giá trị là null
-                            }
-
-                            // Kiểm tra điều kiện phòng và tên phim
-                            if (!phongFromDB.equals(phong) || !movieFromDB.equals(tvTen.getText().toString())) {
-                                continue; // Bỏ qua vé không phù hợp và tiếp tục vòng lặp
-                            }
-
-                            // Lấy danh sách các ghế đã đặt
-                            DataSnapshot gheSnapshot = dataSnapshot.child("ghe");
-                            if (gheSnapshot.exists()) {
-                                for (DataSnapshot seatSnapshot : gheSnapshot.getChildren()) {
-                                    String seat = seatSnapshot.getKey(); // Lấy key của ghế
-                                    bookedSeats.add(seat); // Thêm ghế vào danh sách đã đặt
-                                }
-                            }
-                        }
-
-                        // Cập nhật giao diện người dùng để hiển thị các ghế đã đặt
-                        String seatsString = convertSeatListToString(bookedSeats);
-                        hienthi.setText(seatsString);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Xử lý lỗi nếu cần
-                        Log.e("Firebase", "Lỗi khi đọc dữ liệu từ Firebase", error.toException());
-                    }
-                });
                 slecttime(room);
             }
         });
@@ -602,111 +537,116 @@ public class Buy_StickActivity extends AppCompatActivity {
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View view1 = LayoutInflater.from(Buy_StickActivity.this).inflate(R.layout.user_dialog_xacnhan,null);
+                if(selectedSeats.isEmpty()){
+                    Toast.makeText(Buy_StickActivity.this,"Vui long chon ghe ngoi",Toast.LENGTH_SHORT).show();
+                }else {
+                    View view1 = LayoutInflater.from(Buy_StickActivity.this).inflate(R.layout.user_dialog_xacnhan,null);
 
-                //xử lý sự kiện và gán dữ liệu lên textview
-                TextView tenphim = view1.findViewById(R.id.dailog_tenphim);
-                TextView giochieu = view1.findViewById(R.id.dailog_giochieu);
-                TextView phong = view1.findViewById(R.id.dailog_phongchieu);
-                TextView ghe = view1.findViewById(R.id.dailog_ghechon);
-                TextView total = view1.findViewById(R.id.dailog_total);
-                TextView khoichieu = view1.findViewById(R.id.dailog_khoichieu);
-                TextView soluong = view1.findViewById(R.id.dailog_soluongve);
-                tenphim.setText(tvTen.getText().toString());
-                giochieu.setText(time);
-                phong.setText(room);
-                khoichieu.setText(strKhoiChieu);
+                    //xử lý sự kiện và gán dữ liệu lên textview
+                    TextView tenphim = view1.findViewById(R.id.dailog_tenphim);
+                    TextView giochieu = view1.findViewById(R.id.dailog_giochieu);
+                    TextView phong = view1.findViewById(R.id.dailog_phongchieu);
+                    TextView ghe = view1.findViewById(R.id.dailog_ghechon);
+                    TextView total = view1.findViewById(R.id.dailog_total);
+                    TextView khoichieu = view1.findViewById(R.id.dailog_khoichieu);
+                    TextView soluong = view1.findViewById(R.id.dailog_soluongve);
+                    tenphim.setText(tvTen.getText().toString());
+                    giochieu.setText(time);
+                    phong.setText(room);
+                    khoichieu.setText(strKhoiChieu);
 
-                //xử lý chọn danh sách ghế
-                StringBuilder sb = new StringBuilder();
-                for (String seat : selectedSeats) {
-                    sb.append(seat).append(", ");
-                }
-                String selectedSeatsString = sb.toString();
-                // Xóa dấu phẩy ở cuối
-                if (selectedSeatsString.length() > 0) {
-                    selectedSeatsString = selectedSeatsString.substring(0, selectedSeatsString.length() - 2);
-                }
-                ghe.setText(selectedSeatsString);
-
-                //xử lý tổng tiền
-                int soluongghe = 0;
-                float giave = Float.parseFloat(tvGia.getText().toString());
-                for (int i = 0 ; i < selectedSeats.size() ; i++){
-                    soluongghe++;
-                }
-                float  tongtien = giave * soluongghe ;
-                total.setText(String.valueOf(tongtien));
-
-                //thêm trường mã vé phim , ngày đặt , tên tài khoản đặt , số lượng vé
-                //mã vé randoom
-                Random random = new Random();
-                int randomNumber = random.nextInt(90000)+10000;
-
-                //lấy ra ngày đặt hiện tại
-                Date currentDate = new Date();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String dateString = dateFormat.format(currentDate);
-
-                //lấy ra tên tài khoản
-                String tenTK = "";
-                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                if(firebaseUser != null){
-                    tenTK = firebaseUser.getEmail();
-                }
-
-                // Tạo dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(Buy_StickActivity.this);
-                builder.setView(view1);
-
-
-                String finalTenTK = tenTK;
-                int finalSoluongghe = soluongghe;
-                soluong.setText(String.valueOf(finalSoluongghe));
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("tenphim",tvTen.getText().toString());
-                        map.put("phong",phong.getText().toString());
-                        map.put("gio",giochieu.getText().toString());
-                        map.put("ghe",selectedSeats);
-                        map.put("tongtien",tongtien);
-                        map.put("maphim",randomNumber);
-                        map.put("ngaydat",dateString.toString());
-                        map.put("taikhoandat", finalTenTK.toString());
-                        map.put("soluongve", finalSoluongghe);
-                        map.put("khoichieu",khoichieu.getText().toString());
-
-                        FirebaseDatabase.getInstance().getReference().child("ticket").push()
-                                .setValue(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(Buy_StickActivity.this,"Data insert successfully",Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(Exception e) {
-                                        Toast.makeText(Buy_StickActivity.this,"Data not insert successfully",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
+                    //xử lý chọn danh sách ghế
+                    StringBuilder sb = new StringBuilder();
+                    for (String seat : selectedSeats) {
+                        sb.append(seat).append(", ");
                     }
-                });
-
-                // Thiết lập nút "Cancel" cho dialog
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    String selectedSeatsString = sb.toString();
+                    // Xóa dấu phẩy ở cuối
+                    if (selectedSeatsString.length() > 0) {
+                        selectedSeatsString = selectedSeatsString.substring(0, selectedSeatsString.length() - 2);
                     }
-                });
 
-                // Hiển thị dialog
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                    ghe.setText(selectedSeatsString);
+
+                    //xử lý tổng tiền
+                    int soluongghe = 0;
+                    float giave = Float.parseFloat(tvGia.getText().toString());
+                    for (int i = 0 ; i < selectedSeats.size() ; i++){
+                        soluongghe++;
+                    }
+                    float  tongtien = giave * soluongghe ;
+                    total.setText(String.valueOf(tongtien));
+
+                    //thêm trường mã vé phim , ngày đặt , tên tài khoản đặt , số lượng vé
+                    //mã vé randoom
+                    Random random = new Random();
+                    int randomNumber = random.nextInt(90000)+10000;
+
+                    //lấy ra ngày đặt hiện tại
+                    Date currentDate = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    String dateString = dateFormat.format(currentDate);
+
+                    //lấy ra tên tài khoản
+                    String tenTK = "";
+                    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if(firebaseUser != null){
+                        tenTK = firebaseUser.getEmail();
+                    }
+
+                    // Tạo dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Buy_StickActivity.this);
+                    builder.setView(view1);
+
+
+                    String finalTenTK = tenTK;
+                    int finalSoluongghe = soluongghe;
+                    soluong.setText(String.valueOf(finalSoluongghe));
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Map<String,Object> map = new HashMap<>();
+                            map.put("tenphim",tvTen.getText().toString());
+                            map.put("phong",phong.getText().toString());
+                            map.put("gio",giochieu.getText().toString());
+                            map.put("ghe",selectedSeats);
+                            map.put("tongtien",tongtien);
+                            map.put("maphim",randomNumber);
+                            map.put("ngaydat",dateString.toString());
+                            map.put("taikhoandat", finalTenTK.toString());
+                            map.put("soluongve", finalSoluongghe);
+                            map.put("khoichieu",khoichieu.getText().toString());
+
+                            FirebaseDatabase.getInstance().getReference().child("ticket").push()
+                                    .setValue(map)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(Buy_StickActivity.this,"Data insert successfully",Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(Exception e) {
+                                            Toast.makeText(Buy_StickActivity.this,"Data not insert successfully",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                        }
+                    });
+
+                    // Thiết lập nút "Cancel" cho dialog
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Hiển thị dialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
     }
@@ -844,23 +784,6 @@ public class Buy_StickActivity extends AppCompatActivity {
             default:
                 return null;
         }
-    }
-
-
-
-    private String convertSeatsToString(List<String> bookedSeats) {
-        StringBuilder seatsString = new StringBuilder();
-        for (String seat : bookedSeats) {
-            if (seatsString.length() > 0) {
-                seatsString.append(", "); // Thêm dấu phẩy và khoảng trắng để phân tách các ghế
-            }
-            seatsString.append(seat); // Thêm ghế vào chuỗi
-        }
-        return seatsString.toString();
-    }
-
-    private String convertSeatListToString(ArrayList<String> danhSachGhe) {
-        return TextUtils.join(", ", danhSachGhe);
     }
 
 }
