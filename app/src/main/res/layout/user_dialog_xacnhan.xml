@@ -100,7 +100,7 @@
             android:id="@+id/dailog_thanhtoan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Tiền mặt" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
