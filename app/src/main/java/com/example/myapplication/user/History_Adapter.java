@@ -1,6 +1,7 @@
 package com.example.myapplication.user;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +9,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class History_Adapter extends FirebaseRecyclerAdapter<Ve,History_Adapter.ViewHolder> {
 
@@ -50,6 +56,29 @@ public class History_Adapter extends FirebaseRecyclerAdapter<Ve,History_Adapter.
         // Hiển thị chuỗi danh sách ghế trong TextView
         holder.danhsachghe.setText(chuoiDanhSachGhe);
 
+//        String khoiChieu = model.getKhoichieu();
+//        // So sánh ngày khởi chiếu với ngày hiện tại
+//        if (isDateExpired(model.getKhoichieu())) {
+//            // Nếu ngày khởi chiếu đã hết hạn, đổi màu nền của item
+//            holder.itemView.setBackgroundColor(Color.RED);
+//        } else {
+//            // Nếu không, đặt màu nền mặc định
+//            holder.itemView.setBackgroundColor(Color.TRANSPARENT); // Màu nền trong suốt
+//        }
+
+    }
+
+    private boolean isDateExpired(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        try {
+            Date ticketDate = dateFormat.parse(dateString);
+            Date currentDate = new Date(); // Ngày hiện tại
+            // So sánh ngày khởi chiếu với ngày hiện tại
+            return ticketDate != null && ticketDate.before(currentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private String convertSeatListToString(ArrayList<String> danhSachGhe) {

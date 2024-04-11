@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Thêm sinh viên"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/edt_masinhvien"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Ma sinh vien..."
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_hotensv"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Họ tên"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_diachisv"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Địa chỉ : "
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_ngaysinhsv"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Ngày sinh : "
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_gioitinh"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="giơi tinh"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_emailsv"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="emil"
+        android:paddingStart="10sp" />
+    <EditText
+        android:id="@+id/edt_diemsv"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/custom_edt_admin"
+        android:hint="Điểm : "
+        android:paddingStart="10sp" />
+
+    <Button
+        android:id="@+id/btn_themsv"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:hint="THÊM"
+        android:paddingStart="10sp"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:hint="back"
+        android:paddingStart="10sp"
+        android:textColor="@color/white" />
+
+</LinearLayout>

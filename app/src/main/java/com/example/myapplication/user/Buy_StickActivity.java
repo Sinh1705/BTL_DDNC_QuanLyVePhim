@@ -161,7 +161,6 @@ public class Buy_StickActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Xử lý khi chọn thời gian 7AM-8AM
-                Toast.makeText(Buy_StickActivity.this, "7AM-8AM được chọn", Toast.LENGTH_SHORT).show();
                 radioButton12.setChecked(false);
                 radioButton13.setChecked(false);
                 radioButton14.setChecked(false);
@@ -183,7 +182,6 @@ public class Buy_StickActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Xử lý khi chọn thời gian 8AM-9AM
-                Toast.makeText(Buy_StickActivity.this, "8AM-9AM được chọn", Toast.LENGTH_SHORT).show();
                 radioButton11.setChecked(false);
                 radioButton13.setChecked(false);
                 radioButton14.setChecked(false);
@@ -196,7 +194,6 @@ public class Buy_StickActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Xử lý khi chọn thời gian 9AM-10AM
-                Toast.makeText(Buy_StickActivity.this, "9AM-10AM được chọn", Toast.LENGTH_SHORT).show();
                 radioButton11.setChecked(false);
                 radioButton12.setChecked(false);
                 radioButton14.setChecked(false);
@@ -209,7 +206,6 @@ public class Buy_StickActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Xử lý khi chọn thời gian 10AM-11AM
-                Toast.makeText(Buy_StickActivity.this, "10AM-11AM được chọn", Toast.LENGTH_SHORT).show();
                 radioButton11.setChecked(false);
                 radioButton12.setChecked(false);
                 radioButton13.setChecked(false);
@@ -319,7 +315,7 @@ public class Buy_StickActivity extends AppCompatActivity {
 //                });
 
         //queryBookedSeatsForTimeAndRoom(time,room);
-        checkTimeAndRoom();
+        //checkTimeAndRoom();
 
 
 

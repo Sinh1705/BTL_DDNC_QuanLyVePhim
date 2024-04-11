@@ -86,7 +86,7 @@ public class SeachActivity extends AppCompatActivity {
         String searchKeyword = s.toLowerCase(); // Chuyển đổi từ khóa tìm kiếm về chữ thường để tìm kiếm không phân biệt hoa thường
 
         FirebaseRecyclerOptions<Phim> options = new FirebaseRecyclerOptions.Builder<Phim>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild("ten").startAt(searchKeyword).endAt(searchKeyword+"~"),Phim.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("phim").orderByChild("ten").startAt(s).endAt(s+"\uf8ff"),Phim.class)
                 .build();
         searchview_adapter adapter = new searchview_adapter(options);
         adapter.setOnItemClickListener(new searchview_adapter.OnItemClickListener() {

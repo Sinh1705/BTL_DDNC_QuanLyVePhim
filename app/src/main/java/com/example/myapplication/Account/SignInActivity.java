@@ -79,22 +79,27 @@ public class SignInActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString();
                 String password = edtPass.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(SignInActivity.this,new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    if(user!= null){
-                                        //tài khoản tồn tại và kiểm tra quyền của tài khoản
-                                        //lây ra id của user
-                                        checkUserRole(user.getUid());
+                if(email.isEmpty() && password.isEmpty()){
+                    Toast.makeText(SignInActivity.this, "Tài khoản không hợp lệ vui lòng thử lại", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    mAuth.signInWithEmailAndPassword(email,password)
+                            .addOnCompleteListener(SignInActivity.this,new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        if(user!= null){
+                                            //tài khoản tồn tại và kiểm tra quyền của tài khoản
+                                            //lây ra id của user
+                                            checkUserRole(user.getUid());
+                                        }
+                                    }else{
+                                        Toast.makeText(SignInActivity.this, "Tài khoản không hợp lệ vui lòng thử lại", Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
-                                    Toast.makeText(SignInActivity.this, "Tài khoản không hợp lệ vui lòng thử lại", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
